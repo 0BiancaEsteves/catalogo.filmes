@@ -1,0 +1,122 @@
+.login-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 🔑 Aqui entra a imagem */
+  background-image: url('/img/pipoca.jpg');
+  background-size: cover;         /* cobre toda a tela */
+  background-position: center;    /* centraliza a imagem */
+  background-repeat: no-repeat;   /* não repete */
+  position: relative;             /* para o overlay funcionar */
+}
+
+/* Escurece a imagem de fundo para dar contraste */
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* 40% de escurecimento */
+  z-index: 0;
+}
+
+.login-card {
+  position: relative;
+  z-index: 1;
+  width: 450px; /* largura da caixa */
+  height: 400px; /* altura da caixa */
+  padding: 30px;
+
+  /* 🎯 FUNDO ESCURO TRANSLÚCIDO */
+  background: rgba(0, 0, 0, 0.725);
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+
+  /* Deixa todo o texto branco dentro da caixa */
+  color: white;
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.login-card div {
+  margin-bottom: 15px;
+}
+
+.login-card label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.1); /* fundo levemente claro */
+  color: white;
+  transition: border 0.2s, background 0.2s;
+}
+
+/* Quando o usuário clica no input */
+.login-card input:focus {
+  outline: none;
+  border: 1px solid #007bff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.login-card button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+/* Efeito hover no botão */
+.login-card button:hover {
+  background-color: #0056b3;
+}
+
+/* Borda vermelha no input quando senha errada */
+.login-card input.error-input {
+  border: 2px solid red !important;
+  outline: none;
+  animation: pulseRed 0.5s ease-in-out;
+}
+
+@keyframes pulseRed {
+  0% { border-color: red; }
+  50% { border-color: #ff6666; }
+  100% { border-color: red; }
+}
+
+.error {
+  color: #ff4d4d;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.success {
+  color: #4dff88;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}

@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* src/styles.css (global) */
+/* reset básico */
+* {
+  box-sizing: border-box;
+}
+
+/* remove margens/paddings do html/body e garante 100% de altura */
+html, body, app-root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #000; /* cor de fallback — evita faixas brancas visíveis */
+}
