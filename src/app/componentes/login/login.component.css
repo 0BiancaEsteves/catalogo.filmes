@@ -1,15 +1,20 @@
 .login-container {
-  height: 100vh;
+  height: 100vh; /*altura*/
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  font-size: 20px; /*tamanho da fonte*/
+  margin: 0; /*margem*/
+  padding: 0; /*preenchimento*/
+  background-color: #000; /*cor de fundo*/
 
-  /* 🔑 Aqui entra a imagem */
-  background-image: url('/img/pipoca.jpg');
-  background-size: cover;         /* cobre toda a tela */
-  background-position: center;    /* centraliza a imagem */
-  background-repeat: no-repeat;   /* não repete */
-  position: relative;             /* para o overlay funcionar */
+ 
+  background-image: url('/img/pipoca.jpg'); 
+  background-size: cover; /* cobre toda a tela */
+  background-position: center; /* centraliza a imagem */
+  background-repeat: no-repeat; 
+  position: relative; 
 }
 
 /* Escurece a imagem de fundo para dar contraste */
@@ -20,31 +25,29 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* 40% de escurecimento */
-  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 0; /*define a ordem de empilhamento (para trás)*/
 }
 
 .login-card {
   position: relative;
   z-index: 1;
-  width: 450px; /* largura da caixa */
-  height: 400px; /* altura da caixa */
+  width: 400px; /* largura da caixa */
+  height: 350px; /* altura da caixa */
   padding: 30px;
 
-  /* 🎯 FUNDO ESCURO TRANSLÚCIDO */
-  background: rgba(0, 0, 0, 0.725);
-  border-radius: 20px;
+  /*-------------------------------FUNDO ESCURO TRANSLÚCIDO--------------------*/
+  background: rgba(0, 0, 0, 0.652);
+  border-radius: 20px; /*aredondamento*/
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-
-  /* Deixa todo o texto branco dentro da caixa */
   color: white;
 }
 
-.login-card h2 {
-  text-align: center;
+.login-card h2 { /*Nome 'Login'*/
+  text-align: center; 
   margin-bottom: 15px;
   font-size: 1.8rem;
-  font-weight: bold;
+  font-weight: bold; /*negrito*/
 }
 
 .login-card div {
@@ -69,34 +72,33 @@
   transition: border 0.2s, background 0.2s;
 }
 
-/* Quando o usuário clica no input */
+/*foco na caixa de login */
 .login-card input:focus {
   outline: none;
-  border: 1px solid #007bff;
-  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid #6c1d8f; /* cor do seu roxo */
+  box-shadow: 0 0 5px rgba(23, 5, 31, 0.5); /* leve brilho roxo */
 }
 
 .login-card button {
   width: 100%;
   padding: 15px;
-  margin-top: 10px;
-  background-color: #007bff;
-  border: none;
-  color: white;
+  border: none; 
+  background-color: #6c1d8f;
+  color: #fff;
   font-size: 20px;
   cursor: pointer;
   border-radius: 20px;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
 }
 
-/* Efeito hover no botão */
+
 .login-card button:hover {
-  background-color: #0056b3;
+  background-color: #17051f; /* fundo roxo */
+  color: white; /* texto branco para contraste */
 }
-
-/* Borda vermelha no input quando senha errada */
+/*-------------------------------MENSAGEM DE ERRO é ACERTO (login)------------------*/
 .login-card input.error-input {
-  border: 2px solid red !important;
+  border: 2px solid red !important; /* '!important' serve para dar prioridade máxima a esta estilização */
   outline: none;
   animation: pulseRed 0.5s ease-in-out;
 }
@@ -107,16 +109,27 @@
   100% { border-color: red; }
 }
 
-.error {
+.error { /*Quando a senha for errada*/
   color: #ff4d4d;
   font-weight: bold;
   text-align: center;
   margin-top: 10px;
 }
 
-.success {
+.success {/*quando a senha for certa*/
   color: #4dff88;
   font-weight: bold;
   text-align: center;
   margin-top: 10px;
+}
+
+.login-footer {
+  position: absolute; 
+  bottom: 10px; /* distância do fundo */
+  left: 50%;
+  transform: translateX(-50%); /* centraliza horizontalmente */
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  z-index: 1; /*define a ordem de empilhamento (para frente)*/
 }

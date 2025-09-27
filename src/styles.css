@@ -1,15 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-
-/* src/styles.css (global) */
-/* reset básico */
-* {
-  box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@200..800&family=Jersey+10&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend+Deca:wght@100..900&display=swap');
 
 /* remove margens/paddings do html/body e garante 100% de altura */
 html, body, app-root {
+   font-family: 'Josefin Sans', sans-serif; /*fonte adicionada*/
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #000; /* cor de fallback — evita faixas brancas visíveis */
 }

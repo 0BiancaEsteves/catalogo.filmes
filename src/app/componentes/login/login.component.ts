@@ -14,14 +14,16 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
   successMessage: string = '';
-  senhaIncorreta: boolean = false; // nova variável
+  senhaIncorreta: boolean = false; 
 
-  login() {
+  login() {//Se o nome do usuario for igual a 'admin' é a senha igual a '12345' então, entrada confirmada
     if (this.username.toLowerCase() === 'admin' && this.password === '12345') {
       this.successMessage = `✅ Bem-vindo, ${this.username}!`;
       this.errorMessage = '';
       this.senhaIncorreta = false;
       this.password = '';
+    
+      //senão entrada não confirmada
     } else {
       this.errorMessage = '⚠️ Usuário ou senha incorretos!';
       this.successMessage = '';

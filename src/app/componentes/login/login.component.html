@@ -13,7 +13,7 @@
           [(ngModel)]="password" 
           name="password" 
           required
-          [class.error-input]="senhaIncorreta"> <!-- Borda vermelha quando senha errada -->
+          [class.error-input]="senhaIncorreta">
       </div>
       <button type="submit">Entrar</button>
     </form>
@@ -24,6 +24,9 @@
     <!-- Mensagem de sucesso -->
     <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
   </div>
+
+  <!-- Footer da tela de login -->
+  <footer class="login-footer">
+    <p>Copyright © 2025 Ford</p>
+  </footer>
 </div>
-
-
