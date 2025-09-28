@@ -3,7 +3,8 @@
 
 /* remove margens/paddings do html/body e garante 100% de altura */
 html, body, app-root {
-   font-family: 'Josefin Sans', sans-serif; /*fonte adicionada*/
+  background-color: black;
+  font-family: 'Josefin Sans', sans-serif; /*fonte adicionada*/
   margin: 0;
   padding: 0;
   height: 100%;

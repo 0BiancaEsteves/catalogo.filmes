@@ -1,0 +1,60 @@
+/*--------Fundo da página---------*/
+body {
+  background-color: #000000; 
+  color: #ffffff; 
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/*-------------Seções----------*/
+.catalogo-section {
+  padding: 20px;
+}
+
+/* Títulos das seções */
+.catalogo-section h2 {
+  text-align: center;
+  color: #ffffff; /* branco */
+  margin-bottom: 20px;
+}
+
+/*---------Grid dos cards-------*/
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards por linha */
+  gap: 50px 2px;
+  margin: 20px;
+  padding: 0 0 70px;
+  justify-items: center;
+}
+
+/* Cards */
+.catalogo-card {
+  background-color: #180326; /* fundo roxo */
+  border-radius: 10px;
+  text-align: center;
+  padding: 13px;
+  color: #ffffff; 
+  width: 100%;
+  max-width: 200px; /* limita o tamanho máximo do card */
+}
+
+/* Imagens dentro do card */
+.catalogo-card img {
+  width: 100%; /* ocupa toda a largura do card */
+  height: auto; /* mantém proporção */
+  border-radius: 8px;
+}
+
+/* Títulos dos cards */
+.catalogo-card h3 {
+  margin: 10px 0 5px 0;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+/* embaixa do cards */
+.catalogo-card p {
+  margin: 0;
+  color: #ffffff;
+}
