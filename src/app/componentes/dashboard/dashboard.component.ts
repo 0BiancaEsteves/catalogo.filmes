@@ -13,8 +13,8 @@ export class DashboardComponent {
     { titulo: 'A Substância', poster: '/img/filmes/aSubstancia.png', genero: 'Terror' },
     { titulo: 'Corra!', poster: '/img/filmes/Corra.png', genero: 'Suspense' },
     { titulo: 'Cisne Negro', poster: '/img/filmes/CisneNegro.png', genero: 'Drama' },
-    { titulo: 'It: A Coisa (Parte 1)', poster: '/img/filmes/ITacoisa1.png', genero: 'Terror' },
-    { titulo: 'It: A Coisa (Parte 2)', poster: '/img/filmes/ITacoisa2.png', genero: 'Terror' },
+    { titulo: 'It: A Coisa', poster: '/img/filmes/ITacoisa1.png', genero: 'Terror' },
+    { titulo: 'It: A Coisa, Capitulo 2', poster: '/img/filmes/ITacoisa2.png', genero: 'Terror' },
     { titulo: 'Histórias Cruzadas', poster: '/img/filmes/HistoriasCruzadas.png', genero: 'Drama' },
     { titulo: 'Que Mal Eu Fiz a Deus?', poster: '/img/filmes/QueMalEuFizaDeus1.png', genero: 'Comédia' },
     { titulo: 'Que Mal Eu Fiz a Deus 2?', poster: '/img/filmes/QueMalEuFizaDeus2.png', genero: 'Comédia' }
