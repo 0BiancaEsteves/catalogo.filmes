@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  termoBusca: string = ""; // para o input
+
+  // Arrays originais
   filmes = [
     { titulo: 'A Substância', poster: '/img/filmes/aSubstancia.png', genero: 'Terror' },
     { titulo: 'Corra!', poster: '/img/filmes/Corra.png', genero: 'Suspense' },
@@ -52,4 +56,19 @@ export class DashboardComponent {
     { titulo: 'Minecraft', poster: '/img/jogos/Minecraft.png', genero: 'Sandbox' },
     { titulo: 'INSIDE', poster: '/img/jogos/INSIDE.png', genero: 'Puzzle/Plataforma' }
   ];
+
+  // Arrays filtrados que vão aparecer no HTML
+  filmesFiltrados = [...this.filmes];
+  seriesFiltrados = [...this.series];
+  animesFiltrados = [...this.animes];
+  jogosFiltrados = [...this.jogos];
+
+  buscar() {
+    const termo = this.termoBusca.toLowerCase();
+
+    this.filmesFiltrados = this.filmes.filter(f => f.titulo.toLowerCase().includes(termo));
+    this.seriesFiltrados = this.series.filter(s => s.titulo.toLowerCase().includes(termo));
+    this.animesFiltrados = this.animes.filter(a => a.titulo.toLowerCase().includes(termo));
+    this.jogosFiltrados = this.jogos.filter(j => j.titulo.toLowerCase().includes(termo));
+  }
 }

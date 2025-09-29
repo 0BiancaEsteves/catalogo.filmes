@@ -1,21 +1,21 @@
 <header class="header">
   <div class="logo">
-  <img src="/logo.png" alt="Logo" width="70">
-  <h1>Cátalogos</h1>
+    <img src="/logo.png" alt="Logo" width="70">
+    <h1>Cátalogos</h1>
   </div>
+
   <div class="search-box">
-    <input type="text" placeholder="Buscar">
-    <span class="search-icon">🔍</span>
+    <input type="text" placeholder="Buscar" [(ngModel)]="termoBusca" (ngModelChange)="buscar()">
+    <span class="search-icon" (click)="buscar()">🔍</span>
   </div>
 </header>
 
-
 <main>
-<!-- Filmes -->
+  <!-- Filmes -->
   <div class="catalogo-section filmes">
     <h2 class="catalogo-title">Filmes</h2>
     <div class="catalogo-grid">
-      <div class="catalogo-card" *ngFor="let filme of filmes">
+      <div class="catalogo-card" *ngFor="let filme of filmesFiltrados">
         <img [src]="filme.poster" [alt]="filme.titulo" style="width:150px; height:auto;">
         <h3>{{ filme.titulo }}</h3>
         <p>{{ filme.genero }}</p>
@@ -27,7 +27,7 @@
   <div class="catalogo-section series">
     <h2 class="catalogo-title">Séries</h2>
     <div class="catalogo-grid">
-      <div class="catalogo-card" *ngFor="let serie of series">
+      <div class="catalogo-card" *ngFor="let serie of seriesFiltrados">
         <img [src]="serie.poster" [alt]="serie.titulo" style="width:150px; height:auto;">
         <h3>{{ serie.titulo }}</h3>
         <p>{{ serie.genero }}</p>
@@ -39,7 +39,7 @@
   <div class="catalogo-section animes">
     <h2 class="catalogo-title">Animes</h2>
     <div class="catalogo-grid">
-      <div class="catalogo-card" *ngFor="let anime of animes">
+      <div class="catalogo-card" *ngFor="let anime of animesFiltrados">
         <img [src]="anime.poster" [alt]="anime.titulo" style="width:150px; height:auto;">
         <h3>{{ anime.titulo }}</h3>
         <p>{{ anime.genero }}</p>
@@ -51,16 +51,16 @@
   <div class="catalogo-section jogos">
     <h2 class="catalogo-title">Jogos</h2>
     <div class="catalogo-grid">
-      <div class="catalogo-card" *ngFor="let jogo of jogos">
+      <div class="catalogo-card" *ngFor="let jogo of jogosFiltrados">
         <img [src]="jogo.poster" [alt]="jogo.titulo" style="width:150px; height:auto;">
         <h3>{{ jogo.titulo }}</h3>
         <p>{{ jogo.genero }}</p>
       </div>
     </div>
   </div>
-  </main>
+</main>
 
-  <footer class="footer">
+<footer class="footer">
   <div>
     <p>© 2025 Catálogos Ford</p>
   </div>
