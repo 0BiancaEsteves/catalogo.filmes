@@ -10,6 +10,21 @@
   </div>
 </header>
 
+<div class="carousel">
+  <div class="carousel-image">
+    <img [src]="carouselImages[currentIndex].src"
+         [alt]="carouselImages[currentIndex].alt">
+  </div>
+
+  <!-- Bolinhas de navegação -->
+  <div class="carousel-dots">
+    <span *ngFor="let image of carouselImages; let i = index"
+          (click)="goToSlide(i)"
+          [class.active]="i === currentIndex"></span>
+  </div>
+</div>
+
+
 <main>
   <!-- Filmes -->
   <div class="catalogo-section filmes">

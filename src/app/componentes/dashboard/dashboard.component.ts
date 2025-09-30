@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -9,8 +9,49 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
-  termoBusca: string = ""; // para o input
+export class DashboardComponent implements OnInit, OnDestroy {
+  termoBusca: string = "";
+
+  // Array do carrossel
+  carouselImages = [
+    { src: '/img/animes/C-DeathNote.png', alt: 'Death Note' },
+    { src: '/img/animes/C-OnePiece.png', alt: 'One Piece' },
+    { src: '/img/animes/C-SPYxFAMILY.png', alt: 'SPY x FAMILY' },
+    { src: '/img/filmes/C-aSubstancia.png', alt: 'A Substância' },
+    { src: '/img/filmes/C-CisneNegro.png', alt: 'Cisne Negro' },
+    { src: '/img/filmes/C-Corra.png', alt: 'Corra!' },
+    { src: '/img/series/C-Round6.png', alt: 'Round 6' },
+    { src: '/img/series/C-StrangerThings.png', alt: 'Stranger Things' },
+    { src: '/img/series/C-TodoMundoOdeiaoChris.png', alt: 'Todo Mundo Odeia o Chris' },
+    { src: '/img/jogos/C-Celeste.png', alt: 'Celeste' },
+    { src: '/img/jogos/C-GRIS.png', alt: 'GRIS' },
+    { src: '/img/jogos/C-HollowKnight.png', alt: 'Hollow Knight' },
+  ];
+
+  currentIndex = 0;
+  intervalId: any;
+
+  ngOnInit() {
+    // troca a cada 3 segundos
+    this.intervalId = setInterval(() => {
+      this.next();
+    }, 3000);
+  }
+
+  goToSlide(index: number) { this.currentIndex = index; }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+  }
+
+  next() {
+    this.currentIndex = (this.currentIndex + 1) % this.carouselImages.length;
+  }
+
+  prev() {
+    this.currentIndex =
+      (this.currentIndex - 1 + this.carouselImages.length) % this.carouselImages.length;
+  }
 
   // Arrays originais
   filmes = [
