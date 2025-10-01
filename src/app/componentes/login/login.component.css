@@ -122,6 +122,35 @@
   text-align: center;
   margin-top: 10px;
 }
+/*----------LGPD-----------*/
+/* Caixa LGPD */
+.lgpd-box {
+  margin: 15px 0;
+  font-size: 15px;
+  color: #ccc;
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+
+.lgpd-box input[type="checkbox"] {
+  margin-right: 8px;
+  margin-top: 2px;
+  width: 30px;
+  height: 20px;
+  accent-color: #00c853; /* cor verde para o check */
+}
+
+.lgpd-box a {
+  color: #6c1d8f;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.lgpd-box a:hover {
+  text-decoration: underline;
+}
+
 
 .login-footer {
   position: absolute; 

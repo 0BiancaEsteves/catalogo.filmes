@@ -2,27 +2,51 @@
   <div class="login-card">
     <h2>Login</h2>
     <form (ngSubmit)="login()" novalidate>
+      <!-- Usuário -->
       <div>
         <label>Usuário:</label>
-        <input type="text" [(ngModel)]="username" name="username" required>
+        <input 
+          type="text" 
+          [(ngModel)]="username" 
+          name="username" 
+          required 
+          [class.error-input]="senhaIncorreta"
+        />
       </div>
+
+      <!-- Senha -->
       <div>
         <label>Senha:</label>
         <input 
           type="password" 
           [(ngModel)]="password" 
           name="password" 
-          required
-          [class.error-input]="senhaIncorreta">
+          required 
+          [class.error-input]="senhaIncorreta"
+        />
       </div>
+
+      <!-- Caixa LGPD -->
+      <div class="lgpd-box">
+        <input 
+          type="checkbox" 
+          [(ngModel)]="acceptedTerms" 
+          name="acceptedTerms" 
+          required 
+        />
+        <label>
+          Li e concordo com os <a href="https://portaldatransparencia.gov.br/termos-de-uso">Termos de Uso</a> e a 
+          <a href="https://www.gov.br/receitafederal/pt-br/acesso-a-informacao/lgpd/termo-de-uso">Política de Privacidade</a>, conforme a LGPD.
+        </label>
+      </div>
+
+      <!-- Botão -->
       <button type="submit">Entrar</button>
+
+      <!-- Mensagens -->
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+      <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
     </form>
-
-    <!-- Mensagem de erro -->
-    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-
-    <!-- Mensagem de sucesso -->
-    <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
   </div>
 
   <!-- Footer da tela de login -->
