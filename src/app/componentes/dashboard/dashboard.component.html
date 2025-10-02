@@ -27,10 +27,7 @@
       </div>
     </ng-container>
   </div>
-
-  <button (click)="goToSlide(currentIndex - 1)">‹</button>
-  <button (click)="goToSlide(currentIndex + 1)">›</button>
-
+  
   <div class="carousel-dots">
     <span *ngFor="let filme of filmesPopulares; let i = index"
           (click)="goToSlide(i)"
