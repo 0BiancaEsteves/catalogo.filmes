@@ -1,9 +1,8 @@
 // sobre-filmes.component.ts
-
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router'; // Adicionado RouterModule
-import { HttpClient, HttpClientModule } from '@angular/common/http'; // Adicionado HttpClientModule
-import { CommonModule } from '@angular/common'; // <-- IMPORTE O COMMONMODULE AQUI!
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http'; 
+import { CommonModule } from '@angular/common'; 
 
 @Component({
   selector: 'app-sobre-filmes',
@@ -18,8 +17,8 @@ import { CommonModule } from '@angular/common'; // <-- IMPORTE O COMMONMODULE AQ
 })
 export class SobreFilmesComponent implements OnInit {
   movieData: any;
-  // Use a mesma chave que você usou no Dashboard
-  private apiKey: string = 'COLOQUE A CHAVE AQUI!!'; //COLOQUE A CHAVE AQUI!!
+
+  private apiKey: string = 'COLOQUE A SENHA AQUI!'; //COLOQUE A CHAVE AQUI!!
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 

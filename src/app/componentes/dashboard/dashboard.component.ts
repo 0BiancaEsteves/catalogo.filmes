@@ -1,47 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-// Interface simples para os dados do carrossel
-interface CarouselImage {
-  src: string;
-  alt: string;
-}
-
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule], // <- adicionei RouterModule aqui
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
-  // Propriedades da API de Filmes
+export class DashboardComponent implements OnInit, OnDestroy {
   filmes: any[] = [];
   filmesFiltrados: any[] = [];
+  filmesPopulares: any[] = []; // <- para o carrossel
   termoBusca: string = '';
 
-  private apiKey: string = 'COLOQUE A CHAVE AQUI!!'; //COLOQUE A CHAVE AQUI!!
+  private apiKey: string = 'COLOQUE A SENHA AQUI!';
   private apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=pt-BR&page=1`;
 
-  //-------Adição de imagens do carousel------
-  carouselImages: CarouselImage[] = [
-    { src: 'img/animes/C-OnePece.png', alt: 'Descrição Imagem 1' },
-    { src: 'caminho/para/imagem2.jpg', alt: 'Descrição Imagem 2' },
-    { src: 'caminho/para/imagem3.jpg', alt: 'Descrição Imagem 3' },
-  ];
   currentIndex: number = 0;
+  autoSlideInterval: any;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    // Busca os filmes populares da The Movie DB
     this.http.get(this.apiUrl).subscribe({
       next: (res: any) => {
         this.filmes = res.results;
         this.filmesFiltrados = this.filmes;
+
+        // Pegando os 3 filmes mais populares
+        this.filmesPopulares = this.filmes.slice(0, 3);
+
+        // ✅ Iniciar carrossel automático
+        this.iniciarCarrossel();
       },
       error: (err) => {
         console.error('Erro ao buscar filmes:', err);
@@ -49,14 +43,19 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  //---------Método do carousel---------
-  goToSlide(index: number): void {
-    if (index >= 0 && index < this.carouselImages.length) {
-      this.currentIndex = index;
-    }
+  iniciarCarrossel(): void {
+    this.autoSlideInterval = setInterval(() => {
+      this.goToSlide(this.currentIndex + 1);
+    }, 5000); // troca a cada 5 segundos
   }
 
-  // Lógica de busca de filmes
+  goToSlide(index: number): void {
+    const total = this.filmesPopulares.length;
+    if (total === 0) return;
+
+    this.currentIndex = (index + total) % total;
+  }
+
   buscar(): void {
     if (!this.termoBusca) {
       this.filmesFiltrados = this.filmes;
@@ -66,7 +65,15 @@ export class DashboardComponent implements OnInit {
       );
     }
   }
+
+  ngOnDestroy(): void {
+    if (this.autoSlideInterval) {
+      clearInterval(this.autoSlideInterval);
+    }
+  }
 }
+
+
 
 
 

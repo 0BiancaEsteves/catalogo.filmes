@@ -10,43 +10,54 @@
   </div>
 </header>
 
+
 <div class="carousel">
   <div class="carousel-image">
-    <img [src]="carouselImages[currentIndex].src"
-          [alt]="carouselImages[currentIndex].alt">
+    <ng-container *ngIf="filmesPopulares.length > 0">
+      <img 
+        [src]="'https://image.tmdb.org/t/p/original' + filmesPopulares[currentIndex]?.backdrop_path" 
+        [alt]="filmesPopulares[currentIndex]?.title">
+
+      <div class="carousel-caption">
+        <h2>{{ filmesPopulares[currentIndex]?.title }}</h2>
+        <p>{{ filmesPopulares[currentIndex]?.overview }}</p>
+        <a [routerLink]="['/sobre-filmes', filmesPopulares[currentIndex]?.id]">
+          <button class="detalhes-btn">Ver Detalhes</button>
+        </a>
+      </div>
+    </ng-container>
   </div>
 
+  <button (click)="goToSlide(currentIndex - 1)">‹</button>
+  <button (click)="goToSlide(currentIndex + 1)">›</button>
+
   <div class="carousel-dots">
-    <span *ngFor="let image of carouselImages; let i = index"
+    <span *ngFor="let filme of filmesPopulares; let i = index"
           (click)="goToSlide(i)"
           [class.active]="i === currentIndex"></span>
   </div>
 </div>
 
+<!-- 🔍 Catálogo de filmes -->
 <main>
   <section class="catalogo-section filmes">
     <h2>Filmes</h2>
     <div class="catalogo-grid">
-      
       <div *ngFor="let filme of filmesFiltrados" class="catalogo-card">
-        
         <a [routerLink]="['/filme', filme.id]">
-          
           <img 
             [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" 
-            [alt]="filme.title"
-          >
-          
+            [alt]="filme.title">
           <h3>{{ filme.title }}</h3>
-          
         </a>
-        
-      </div> </div> </section>
+      </div>
+    </div>
+  </section>
 </main>
-
 
 <footer class="footer">
   <div>
     <p>© 2025 Catálogos Ford</p>
   </div>
 </footer>
+
