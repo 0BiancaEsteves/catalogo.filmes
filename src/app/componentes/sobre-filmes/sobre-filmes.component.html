@@ -1,0 +1,45 @@
+<div *ngIf="movieData" class="detalhes-filme">
+  
+  <div class="header-filme">
+    <div 
+      class="backdrop" 
+      [style.background-image]="'url(https://image.tmdb.org/t/p/original' + movieData.backdrop_path + ')'"
+    >
+      <div class="info-principal">
+        <img 
+          class="poster"
+          [src]="'https://image.tmdb.org/t/p/w500' + movieData.poster_path" 
+          [alt]="movieData.title"
+        >
+        
+        <div class="texto-info">
+          <h1>{{ movieData.title }}</h1>
+          <p class="tagline">{{ movieData.tagline }}</p>
+          <p class="lancamento">Data de Lançamento: {{ movieData.release_date | date: 'dd/MM/yyyy' }}</p>
+          <p class="nota">Nota: {{ movieData.vote_average | number: '1.1-1' }} / 10</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="corpo-filme">
+    <h2>Sinopse</h2>
+    <p class="sinopse">{{ movieData.overview }}</p>
+
+    <div class="generos">
+      <h3>Gêneros</h3>
+      <ul>
+        <li *ngFor="let genero of movieData.genres">{{ genero.name }}</li>
+      </ul>
+    </div>
+    
+    <a routerLink="/dashboard" class="botao-voltar">
+      &larr; Voltar para o Dashboard
+    </a>
+  </div>
+  
+</div>
+
+<div *ngIf="!movieData" class="carregando">
+  Carregando detalhes do filme...
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 // Interface simples para os dados do carrossel
@@ -12,7 +13,7 @@ interface CarouselImage {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule], // <- adicionei RouterModule aqui
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
@@ -22,10 +23,10 @@ export class DashboardComponent implements OnInit {
   filmesFiltrados: any[] = [];
   termoBusca: string = '';
 
-  private apiKey: string = 'COLOCAR A CHAVER AQUI!!!'; // Sua chave
+  private apiKey: string = 'COLOQUE A CHAVE AQUI!!'; //COLOQUE A CHAVE AQUI!!
   private apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=pt-BR&page=1`;
 
-//-------Adição de imagens do carousel------
+  //-------Adição de imagens do carousel------
   carouselImages: CarouselImage[] = [
     { src: 'img/animes/C-OnePece.png', alt: 'Descrição Imagem 1' },
     { src: 'caminho/para/imagem2.jpg', alt: 'Descrição Imagem 2' },
@@ -41,17 +42,14 @@ export class DashboardComponent implements OnInit {
       next: (res: any) => {
         this.filmes = res.results;
         this.filmesFiltrados = this.filmes;
-        // Opcional: Você pode querer usar as imagens dos filmes no carrossel.
-        // Se não for o caso, mantenha o array `carouselImages` acima.
       },
       error: (err) => {
         console.error('Erro ao buscar filmes:', err);
-        // Trate o erro, talvez mostrando uma mensagem para o usuário.
       }
     });
   }
 
-//---------Metodo  do carousel---------
+  //---------Método do carousel---------
   goToSlide(index: number): void {
     if (index >= 0 && index < this.carouselImages.length) {
       this.currentIndex = index;

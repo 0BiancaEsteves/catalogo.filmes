@@ -13,10 +13,9 @@
 <div class="carousel">
   <div class="carousel-image">
     <img [src]="carouselImages[currentIndex].src"
-         [alt]="carouselImages[currentIndex].alt">
+          [alt]="carouselImages[currentIndex].alt">
   </div>
 
-  <!-- Bolinhas de navegação -->
   <div class="carousel-dots">
     <span *ngFor="let image of carouselImages; let i = index"
           (click)="goToSlide(i)"
@@ -24,21 +23,25 @@
   </div>
 </div>
 
-
-
-  <!-- Filmes -->
 <main>
-  <!-- Seção de Filmes -->
   <section class="catalogo-section filmes">
     <h2>Filmes</h2>
     <div class="catalogo-grid">
+      
       <div *ngFor="let filme of filmesFiltrados" class="catalogo-card">
-        <img [src]="'https://image.tmdb.org/t/p/w200' + filme.poster_path" alt="{{filme.title}}">
-        <h3>{{ filme.title }}</h3>
-        <p>{{ filme.overview }}</p>
-      </div>
-    </div>
-  </section>
+        
+        <a [routerLink]="['/filme', filme.id]">
+          
+          <img 
+            [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" 
+            [alt]="filme.title"
+          >
+          
+          <h3>{{ filme.title }}</h3>
+          
+        </a>
+        
+      </div> </div> </section>
 </main>
 
 
