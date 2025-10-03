@@ -1,16 +1,41 @@
 <header class="header">
-  <div class="logo">
-    <img src="/logo.png" alt="Logo">
-    <h1>Cátalogos</h1>
+  <div class="header-left">
+    <div class="logo">
+      <img src="/logo.png" alt="Logo">
+      <h1>Cátalogos</h1>
+    </div>
   </div>
 
-  <div class="search-box">
-    <input type="text" placeholder="Buscar" [(ngModel)]="termoBusca" (ngModelChange)="buscar()">
-    <span class="search-icon" (click)="buscar()">🔍</span>
+  <div class="header-right">
+    <!-- Caixa de busca -->
+    <div class="search-box">
+      <input type="text" placeholder="Buscar"
+             [(ngModel)]="termoBusca"
+             (focus)="buscaAtiva = true"
+             (blur)="buscaAtiva = termoBusca.length > 0"
+             (ngModelChange)="buscar()">
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <!-- Botão de logout -->
+    <button class="logout-btn" (click)="logout()">Sair</button>
   </div>
 </header>
 
+<!-- Overlay transparente -->
+<div class="overlay" *ngIf="buscaAtiva"></div>
 
+<!-- Filmes filtrados por cima do dashboard quando busca ativa -->
+<div class="resultados-busca" *ngIf="buscaAtiva && filmesFiltrados.length > 0">
+  <div *ngFor="let filme of filmesFiltrados" class="resultado-card">
+    <a [routerLink]="['/filme', filme.id]">
+      <img [src]="'https://image.tmdb.org/t/p/w200' + filme.poster_path" [alt]="filme.title">
+      <h3>{{ filme.title }}</h3>
+    </a>
+  </div>
+</div>
+
+<!-- Carrossel fica fora do main -->
 <div class="carousel">
   <div class="carousel-image">
     <ng-container *ngIf="filmesPopulares.length > 0">
@@ -35,25 +60,19 @@
   </div>
 </div>
 
-<!-- 🔍 Catálogo de filmes -->
-<main>
+<!-- Catálogo de filmes dentro do main -->
+<main [class.transparent]="buscaAtiva">
   <section class="catalogo-section filmes">
     <h2>Filmes mais populares</h2>
     <div class="catalogo-grid">
- <div *ngFor="let filme of filmesFiltrados" class="catalogo-card">
-  <a [routerLink]="['/filme', filme.id]">
-    <!-- Badge com foguinho no círculo -->
-    <div class="badge-circle">
-      🔥
+      <div *ngFor="let filme of filmesFiltrados" class="catalogo-card">
+        <a [routerLink]="['/filme', filme.id]">
+          <div class="badge-circle">🔥</div>
+          <img [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" [alt]="filme.title">
+          <h3>{{ filme.title }}</h3>
+        </a>
+      </div>
     </div>
-    
-    <img 
-      [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" 
-      [alt]="filme.title">
-    <h3>{{ filme.title }}</h3>
-    </a>
-  </div>
-</div>
   </section>
 </main>
 

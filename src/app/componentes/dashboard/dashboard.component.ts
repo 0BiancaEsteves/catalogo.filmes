@@ -1,5 +1,4 @@
 // dashboard.component.ts
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,14 +15,15 @@ import { HttpClient } from '@angular/common/http';
 export class DashboardComponent implements OnInit, OnDestroy {
   filmes: any[] = [];
   filmesFiltrados: any[] = [];
-  filmesPopulares: any[] = []; // <- para o carrossel
+  filmesPopulares: any[] = [];
   termoBusca: string = '';
 
-  private apiKey: string = 'COLOQUE A SENHA AQUI!!';//COLOQUE A SENHA AQUI!!
+  private apiKey: string = '';//COLOQUE A SENHA!!
   private apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=pt-BR&page=1`;
 
   currentIndex: number = 0;
   autoSlideInterval: any;
+  buscaAtiva = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -31,52 +31,42 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.http.get(this.apiUrl).subscribe({
       next: (res: any) => {
         this.filmes = res.results;
-        this.filmesFiltrados = this.filmes;
-
-        // Pegando os 5 filmes mais populares
-        this.filmesPopulares = this.filmes.slice(0, 5);
-
-        // ✅ Iniciar carrossel automático
+        this.filmesFiltrados = this.filmes.slice(0, 20); // primeira página
+        this.filmesPopulares = this.filmes.slice(0, 5); // carrossel
         this.iniciarCarrossel();
       },
-      error: (err) => {
-        console.error('Erro ao buscar filmes:', err);
-      }
+      error: (err) => console.error('Erro ao buscar filmes:', err)
     });
   }
 
   iniciarCarrossel(): void {
     this.autoSlideInterval = setInterval(() => {
       this.goToSlide(this.currentIndex + 1);
-    }, 5000); // troca a cada 5 segundos
+    }, 5000);
   }
 
   goToSlide(index: number): void {
     const total = this.filmesPopulares.length;
     if (total === 0) return;
-
     this.currentIndex = (index + total) % total;
   }
 
   buscar(): void {
     if (!this.termoBusca) {
-      this.filmesFiltrados = this.filmes;
+      this.filmesFiltrados = this.filmes.slice(0, 20);//buscar
     } else {
       this.filmesFiltrados = this.filmes.filter(filme =>
         filme.title.toLowerCase().includes(this.termoBusca.toLowerCase())
       );
     }
   }
-  
 
-  irParaDetalhes(filme: any): void {
-    // Isso navega para a rota de detalhes, passando o ID do filme
-    this.router.navigate(['/detalhes', filme.id]); 
+  logout(): void {
+    this.router.navigate(['/login']);
   }
 
   ngOnDestroy(): void {
-    if (this.autoSlideInterval) {
-      clearInterval(this.autoSlideInterval);
-    }
+    if (this.autoSlideInterval) clearInterval(this.autoSlideInterval);
   }
 }
+
