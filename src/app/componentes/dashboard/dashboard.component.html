@@ -1,6 +1,6 @@
 <header class="header">
   <div class="logo">
-    <img src="/logo.png" alt="Logo" width="70">
+    <img src="/logo.png" alt="Logo">
     <h1>Cátalogos</h1>
   </div>
 
@@ -38,17 +38,22 @@
 <!-- 🔍 Catálogo de filmes -->
 <main>
   <section class="catalogo-section filmes">
-    <h2>Filmes</h2>
+    <h2>Filmes mais populares</h2>
     <div class="catalogo-grid">
-      <div *ngFor="let filme of filmesFiltrados" class="catalogo-card">
-        <a [routerLink]="['/filme', filme.id]">
-          <img 
-            [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" 
-            [alt]="filme.title">
-          <h3>{{ filme.title }}</h3>
-        </a>
-      </div>
+ <div *ngFor="let filme of filmesFiltrados" class="catalogo-card">
+  <a [routerLink]="['/filme', filme.id]">
+    <!-- Badge com foguinho no círculo -->
+    <div class="badge-circle">
+      🔥
     </div>
+
+    <img 
+      [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" 
+      [alt]="filme.title">
+    <h3>{{ filme.title }}</h3>
+    </a>
+  </div>
+</div>
   </section>
 </main>
 
@@ -57,4 +62,5 @@
     <p>© 2025 Catálogos Ford</p>
   </div>
 </footer>
+
 

@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 export class SobreFilmesComponent implements OnInit {
   movieData: any;
 
-  private apiKey: string = 'COLOQUE A CHAVE AQUI!'; //COLOQUE A CHAVE AQUI!!
+  private apiKey: string = 'COLOQUE A CHAVE AQUI!!'; //COLOQUE A CHAVE AQUI!!
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 

@@ -26,6 +26,7 @@ main {
   display: flex;
   align-items: center;
   gap: 15px;
+  width: 170px;
 }
 
 .logo h1 {
@@ -241,6 +242,51 @@ main {
   color: #ffffff;
 }
 
+/* -------- Ajuste dos cards -------- */
+.catalogo-card {
+  background-color: #230a35;
+  border-radius: 10px;
+  text-align: center;
+  padding: 13px;
+  color: #ffffff;
+  width: 100%;
+  max-width: 200px;
+  position: relative; /* 🔥 Necessário pro badge */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.catalogo-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+/* -------- Badge “Populares” 🔥 -------- */
+
+.badge-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background-color: #f6400998;
+  border-radius: 50%; /* Isso cria o círculo */
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  position: absolute; 
+  top: 8px;
+  left: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* -------- Badge dentro do carrossel -------- */
+.carousel-caption .badge-popular {
+  position: static; /* Fica dentro do box da legenda */
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  background-color: #ff5622;
+}
+
 /*---------Footer---------*/
 .footer {
   background-color: #180326;
@@ -333,5 +379,32 @@ main {
   .logo h1 {
     font-size: 1.2rem;
     top: 5px;
+  }
+}
+
+/* -------- Grid fixo com 3 colunas -------- */
+@media (max-width: 1024px) {
+  .catalogo-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .catalogo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .catalogo-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin: 10px;
+    padding-bottom: 50px;
+    justify-content: center;
   }
 }

@@ -119,3 +119,38 @@
   padding: 50px;
   font-size: 1.2rem;
 }
+/*-------foguinho------*/
+.badge-popular {
+  display: inline-block;
+  background-color: #f6400998;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/*---------Estrela de avaliação----------*/
+.avaliacao-estrelas {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  font-size: 1.2rem;
+}
+
+.avaliacao-estrelas span {
+  color: #555; /* cor das estrelas vazias */
+}
+
+.avaliacao-estrelas span.filled {
+  color: #FFD700; /* dourado para estrelas preenchidas */
+}
+
+.avaliacao-estrelas .nota-numero {
+  font-size: 0.9rem;
+  color: #fff;
+  margin-left: 5px;
+}

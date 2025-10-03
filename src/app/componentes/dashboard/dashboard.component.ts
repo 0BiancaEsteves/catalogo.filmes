@@ -1,7 +1,9 @@
+// dashboard.component.ts
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router'; 
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -17,13 +19,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   filmesPopulares: any[] = []; // <- para o carrossel
   termoBusca: string = '';
 
-  private apiKey: string = 'COLOQUE A CHAVE AQUI!';
+  private apiKey: string = 'COLOQUE A CHAVE AQUI!!';
   private apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=pt-BR&page=1`;
 
   currentIndex: number = 0;
   autoSlideInterval: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.http.get(this.apiUrl).subscribe({
@@ -65,6 +67,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       );
     }
   }
+  
+
+  irParaDetalhes(filme: any): void {
+    // Isso navega para a rota de detalhes, passando o ID do filme
+    this.router.navigate(['/detalhes', filme.id]); 
+  }
 
   ngOnDestroy(): void {
     if (this.autoSlideInterval) {
@@ -72,8 +80,3 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 }
-
-
-
-
-

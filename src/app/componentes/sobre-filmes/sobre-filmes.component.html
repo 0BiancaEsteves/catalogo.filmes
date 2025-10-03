@@ -17,6 +17,19 @@
           <p class="tagline">{{ movieData.tagline }}</p>
           <p class="lancamento">Data de Lançamento: {{ movieData.release_date | date: 'dd/MM/yyyy' }}</p>
           <p class="nota">Nota: {{ movieData.vote_average | number: '1.1-1' }} / 10</p>
+          
+          <!-- Avaliação em estrelas -->
+          <div class="avaliacao-estrelas">
+            <ng-container *ngFor="let estrela of [1,2,3,4,5]">
+              <span [class.filled]="movieData.vote_average/2 >= estrela">★</span>
+            </ng-container>
+          </div>
+
+
+          <!-- 🔥 Badge Populares -->
+          <div class="badge-popular">
+            🔥 Populares
+          </div>
         </div>
       </div>
     </div>
