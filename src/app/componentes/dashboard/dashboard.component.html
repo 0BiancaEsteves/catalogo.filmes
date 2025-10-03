@@ -21,7 +21,7 @@
       <div class="carousel-caption">
         <h2>{{ filmesPopulares[currentIndex]?.title }}</h2>
         <p>{{ filmesPopulares[currentIndex]?.overview }}</p>
-        <a [routerLink]="['/sobre-filmes', filmesPopulares[currentIndex]?.id]">
+        <a [routerLink]="['/filme', filmesPopulares[currentIndex]?.id]">
           <button class="detalhes-btn">Ver Detalhes</button>
         </a>
       </div>

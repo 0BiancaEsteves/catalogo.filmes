@@ -33,8 +33,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.filmes = res.results;
         this.filmesFiltrados = this.filmes;
 
-        // Pegando os 3 filmes mais populares
-        this.filmesPopulares = this.filmes.slice(0, 3);
+        // Pegando os 5 filmes mais populares
+        this.filmesPopulares = this.filmes.slice(0, 5);
 
         // ✅ Iniciar carrossel automático
         this.iniciarCarrossel();
