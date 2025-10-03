@@ -160,7 +160,7 @@ main {
   text-overflow: ellipsis;
 }
 
-/*----------Botão "Ver Detalhes" (compacto)----------*/
+/*----------Botão "Ver Detalhes"----------*/
 .detalhes-btn {
   padding: 12px 30px;
   font-size: 1.2rem;
@@ -177,6 +177,11 @@ main {
   background-color: #6c1d8f;
 }
 /*--------------Título----------*/
+.catalogo-card a {
+  text-decoration: none;
+  color: inherit;         
+}
+
 .catalogo-section h2 {
   text-align: center;
   width: 100%;
