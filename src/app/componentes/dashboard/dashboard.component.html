@@ -1,3 +1,5 @@
+<!-- Dashboard / Catálogo de Filmes -->
+
 <header class="header">
   <div class="header-left">
     <div class="logo">
@@ -24,23 +26,25 @@
 <!-- Overlay transparente -->
 <div class="overlay" *ngIf="buscaAtiva"></div>
 
-<!-- Filmes filtrados por cima do dashboard quando busca ativa -->
+<!-- Resultados filtrados -->
 <div class="resultados-busca" *ngIf="buscaAtiva && filmesFiltrados.length > 0">
   <div *ngFor="let filme of filmesFiltrados" class="resultado-card">
     <a [routerLink]="['/filme', filme.id]">
       <img [src]="'https://image.tmdb.org/t/p/w200' + filme.poster_path" [alt]="filme.title">
       <h3>{{ filme.title }}</h3>
+      <span class="classificacao" [ngClass]="getClassificacaoColor(filme.classificacao)">
+        {{ filme.classificacao || 'N/A' }}
+      </span>
     </a>
   </div>
 </div>
 
-<!-- Carrossel fica fora do main -->
+<!-- Carrossel -->
 <div class="carousel">
   <div class="carousel-image">
     <ng-container *ngIf="filmesPopulares.length > 0">
-      <img 
-        [src]="'https://image.tmdb.org/t/p/original' + filmesPopulares[currentIndex]?.backdrop_path" 
-        [alt]="filmesPopulares[currentIndex]?.title">
+      <img [src]="'https://image.tmdb.org/t/p/original' + filmesPopulares[currentIndex]?.backdrop_path" 
+           [alt]="filmesPopulares[currentIndex]?.title">
 
       <div class="carousel-caption">
         <h2>{{ filmesPopulares[currentIndex]?.title }}</h2>
@@ -51,7 +55,7 @@
       </div>
     </ng-container>
   </div>
-  
+
   <div class="carousel-dots">
     <span *ngFor="let filme of filmesPopulares; let i = index"
           (click)="goToSlide(i)"
@@ -59,7 +63,7 @@
   </div>
 </div>
 
-<!-- Catálogo de filmes dentro do main -->
+<!-- Catálogo de filmes -->
 <main [class.transparent]="buscaAtiva">
   <section class="catalogo-section filmes">
     <h1>Filmes mais populares</h1>
@@ -69,6 +73,9 @@
           <div class="badge-circle">🔥</div>
           <img [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" [alt]="filme.title">
           <h3>{{ filme.title }}</h3>
+          <span class="classificacao" [ngClass]="getClassificacaoColor(filme.classificacao)">
+            {{ filme.classificacao || 'N/A' }}
+          </span>
         </a>
       </div>
     </div>
@@ -76,9 +83,6 @@
 </main>
 
 <footer class="footer">
-  <div>
-    <p>© 2025 Catálogos dashboard</p>
-  </div>
+  <p>© 2025 Catálogos dashboard</p>
 </footer>
-
 

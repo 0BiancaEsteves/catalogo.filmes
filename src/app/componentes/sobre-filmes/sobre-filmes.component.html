@@ -1,5 +1,4 @@
 <div *ngIf="movieData" class="detalhes-filme">
-  
   <div class="header-filme">
     <div 
       class="backdrop" 
@@ -14,17 +13,31 @@
         
         <div class="texto-info">
           <h1>{{ movieData.title }}</h1>
-          <p class="tagline">{{ movieData.tagline }}</p>
-          <p class="lancamento">Data de Lançamento: {{ movieData.release_date | date: 'dd/MM/yyyy' }}</p>
-          <p class="nota">Nota: {{ movieData.vote_average | number: '1.1-1' }} / 10</p>
-          
-          <!-- Avaliação em estrelas -->
+
+          <!-- Avaliação em estrelas + classificação indicativa juntas -->
           <div class="avaliacao-estrelas">
             <ng-container *ngFor="let estrela of [1,2,3,4,5]">
               <span [class.filled]="movieData.vote_average/2 >= estrela">★</span>
             </ng-container>
+
+            <!-- Classificação Indicativa -->
+            <span class="classificacao" 
+                  [ngClass]="{
+                    'livre': movieData.classificacao === 'L',
+                    'dez': movieData.classificacao === '10',
+                    'doze': movieData.classificacao === '12',
+                    'quatorze': movieData.classificacao === '14',
+                    'dezesseis': movieData.classificacao === '16',
+                    'dezoito': movieData.classificacao === '18',
+                    'sem-classificacao': movieData.classificacao === 'Sem'
+                  }">
+              {{ movieData.classificacao }}
+            </span>
           </div>
 
+          <p class="tagline">{{ movieData.tagline }}</p>
+          <p class="lancamento">Data de Lançamento: {{ movieData.release_date | date: 'dd/MM/yyyy' }}</p>
+          <p class="nota">Nota: {{ movieData.vote_average | number: '1.1-1' }} / 10</p>
 
           <!-- 🔥 Badge Populares -->
           <div class="badge-popular">
@@ -50,9 +63,9 @@
       &larr; Voltar para o Dashboard
     </a>
   </div>
-  
 </div>
 
 <div *ngIf="!movieData" class="carregando">
   Carregando detalhes do filme...
 </div>
+

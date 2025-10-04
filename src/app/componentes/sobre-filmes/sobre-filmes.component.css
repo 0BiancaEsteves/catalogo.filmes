@@ -54,7 +54,7 @@
   font-style: italic;
   font-size: 1.1rem;
   margin-bottom: 15px;
-  color: #ddd;
+  color: #fff;
 }
 
 .lancamento, 
@@ -63,7 +63,6 @@
   font-weight: bold;
 }
 
-/* Corpo do filme */
 .corpo-filme {
   background: #111;
   padding: 40px 60px;
@@ -103,7 +102,7 @@
   display: inline-block;
   margin-top: 30px;
   padding: 10px 20px;
-  background: #6c1d8f; /*#17051f*/
+  background: #6c1d8f;
   color: white;
   border-radius: 5px;
   text-decoration: none;
@@ -119,7 +118,8 @@
   padding: 50px;
   font-size: 1.2rem;
 }
-/*-------foguinho------*/
+
+/* Badge Populares */
 .badge-popular {
   display: inline-block;
   background-color: #f6400998;
@@ -132,25 +132,42 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
-/*---------Estrela de avaliação----------*/
+/* Avaliação em estrelas */
 .avaliacao-estrelas {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   margin-top: 8px;
   font-size: 1.2rem;
 }
 
 .avaliacao-estrelas span {
-  color: #555; /* cor das estrelas vazias */
+  color: #555;
 }
 
 .avaliacao-estrelas span.filled {
-  color: #FFD700; /* dourado para estrelas preenchidas */
+  color: #FFD700;
 }
 
-.avaliacao-estrelas .nota-numero {
+/* Classificação indicativa inline com estrelas */
+.classificacao {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: bold;
   font-size: 0.9rem;
-  color: #fff;
-  margin-left: 5px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
+.detalhes-filme .header-filme .info-principal .texto-info .classificacao {
+  color: #fff;
+}
+
+/* Cores da classificação */
+.classificacao.livre { background-color: #28a745; }  
+.classificacao.dez { background-color: #007bff; }       
+.classificacao.doze { background-color: #ffc107; }      
+.classificacao.quatorze { background-color: #ff7f50; }   
+.classificacao.dezesseis { background-color: #dc3545; } 
+.classificacao.dezoito { background-color: #000000; }   
+.classificacao.sem-classificacao { background-color: #6c757d; } 

@@ -1,6 +1,6 @@
 /* -------- Fundo da página -------- */
 main {
-  color: #fff; 
+  color: #fff;
   margin: 0;
   padding-top: 80px; /* altura do header */
 }
@@ -11,7 +11,7 @@ main {
   top: 0; left: 0;
   width: 100%;
   height: 100px;
-  background: #180326; /* cor do header */
+  background: #180326;
   border-bottom: 2px solid #8925b4;
   display: flex;
   align-items: center;
@@ -20,12 +20,12 @@ main {
   z-index: 1000;
 }
 
-/* Logo */
 .logo {
   display: flex;
   align-items: center;
   gap: 15px;
 }
+
 .logo h1 {
   margin: 0;
   font-size: 1.8rem;
@@ -33,12 +33,12 @@ main {
   color: #fff;
 }
 
-
 .header-right {
   display: flex;
   align-items: center;
-  gap: 500px; /* espaço entre input e botão */
+  gap: 500px;
 }
+
 .search-box input {
   width: 100%;
   padding: 10px 100px 10px 10px;
@@ -49,6 +49,10 @@ main {
   color: #fff;
   font-size: 1rem;
   transition: all 0.3s ease;
+}
+
+.search-box input:hover {
+  border: 2px solid #3c0d50;
 }
 
 /* Botão logout */
@@ -62,13 +66,14 @@ main {
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
-  white-space: nowrap; /* evita quebrar o texto */
+  white-space: nowrap;
 }
+
 .logout-btn:hover {
   background: #6c1d8f;
 }
 
-/* -------- Overlay -------- */
+/* Overlay */
 .overlay {
   position: fixed;
   top: 0; left: 0;
@@ -76,15 +81,16 @@ main {
   background: rgba(0,0,0,.7);
   z-index: 1000;
 }
+
 main.transparent { opacity: .2; pointer-events: none; }
 
-/* -------- Resultados Busca -------- */
+/* -------- Resultados da busca -------- */
 .resultados-busca {
   position: fixed;
   top: 100px; left: 50%;
   transform: translateX(-50%);
   width: 80%; max-height: 70vh;
-  overflow-y: auto;
+  overflow-y: none;
   background: rgba(0,0,0,.95);
   border-radius: 10px;
   padding: 20px;
@@ -93,66 +99,134 @@ main.transparent { opacity: .2; pointer-events: none; }
   grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
   gap: 15px;
 }
-.resultado-card { 
-  text-align: center; 
-  color: #fff; 
+
+.resultado-card {
+  text-align: center;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-decoration: none;
 }
+
+.resultado-card a {
+  text-decoration: none; /* remove linha do link */
+  color: inherit;
+}
+
 .resultado-card img {
   width: 100%;
   border-radius: 8px;
   margin-bottom: 10px;
 }
+
 .resultado-card h3 {
   margin: 0;
-  text-align: center;
   color: #fff;
-  display: -webkit-box;    
-  -webkit-box-orient: vertical;  
-  overflow: hidden;               
-  text-overflow: ellipsis;        
-  white-space: normal;            
-  border: none;                   
-  text-decoration: none;          
+  text-align: center;
+}
+
+/* -------- Catálogo de filmes -------- */
+.catalogo-section h1 {
+  text-align: center;
+  font-weight: bold;
+  margin: 70px auto 70px;
+}
+
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 30px;
+  padding: 0 50px 70px;
+}
+
+.catalogo-card {
+  background: #230a35;
+  border-radius: 10px;
+  text-align: center;
+  padding: 13px;
+  color: #fff;
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.catalogo-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,.6);
+}
+
+.catalogo-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.catalogo-card h3 {
+  margin: 5px 0;
+  color: #fff;
+}
+
+.catalogo-card a {
+  text-decoration: none; /* remove linha do link */
+  color: inherit;
+}
+
+/*---classificação indicativa----*/
+.classificacao {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7); /* sombra no texto */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5); /* sombra ao redor do fundo */
+}
+
+/* Cores por idade */
+.classificacao.livre { background-color: #28a745; }       /* verde */
+.classificacao.dez { background-color: #007bff; }         /* azul */
+.classificacao.doze { background-color: #ffc107; }        /* amarelo */
+.classificacao.quatorze { background-color: #ff7f50; }    /* vermelho claro */
+.classificacao.dezesseis { background-color: #dc3545; }   /* vermelho forte */
+.classificacao.dezoito { background-color: #000000; }     /* preto */
+.classificacao.sem-classificacao { background-color: #6c757d; } /* cinza */
+
+/* Badge de destaque (🔥) */
+.badge-circle {
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  width: 30px; height: 30px;
+  background: #f6400998;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.2rem; font-weight: bold;
+  position: absolute; top: 8px; left: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.5);
 }
 
 /* -------- Carrossel -------- */
 .carousel {
   position: relative;
   width: 100%;
-  height: calc(100vh - 100px); /* altura da tela menos header */
-  top: 100px; /* empurra o carrossel para ficar abaixo do header fixo */
+  height: calc(100vh - 100px);
+  top: 100px;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.carousel-image {
-  width: 100%; height: 100%;
-  display: flex; justify-content: center; align-items: center;
-}
+
 .carousel-image img {
-  max-height: 150%;
-  width: auto;
-  object-fit: contain;
+  width: 100%;
+  object-fit: cover;
 }
-.carousel-dots {
-  position: absolute;
-  bottom: 20px; width: 100%;
-  display: flex; justify-content: center; gap: 10px;
-  z-index: 10;
-}
-.carousel-dots span {
-  width: 12px; height: 12px;
-  background: rgba(255,255,255,.5);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background .3s;
-}
-.carousel-dots span.active { background: #fff; }
+
 .carousel-caption {
   position: absolute;
   bottom: 8%; left: 4%;
@@ -164,17 +238,11 @@ main.transparent { opacity: .2; pointer-events: none; }
   backdrop-filter: blur(3px);
   box-shadow: 0 2px 15px rgba(0,0,0,.4);
 }
-.carousel-caption h2 { margin: 0 0 8px; font-size: 1.4rem; font-weight: 600; }
-.carousel-caption p {
-  margin-bottom: 12px;
-  font-size: .95rem;
-  line-height: 1.3;
-  max-height: 60px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
-/*----------Botão "Ver Detalhes"----------*/
+.carousel-caption h2 { margin: 0 0 8px; font-size: 1.4rem; font-weight: 600; }
+.carousel-caption p { margin-bottom: 12px; font-size: .95rem; line-height: 1.3; }
+
+/* Botão "Ver Detalhes" */
 .detalhes-btn {
   padding: 12px 30px;
   font-size: 1.2rem;
@@ -187,67 +255,9 @@ main.transparent { opacity: .2; pointer-events: none; }
   transition: background 0.3s ease;
 }
 
-.detalhes-btn:hover {
-  background-color: #6c1d8f;
-}
+.detalhes-btn:hover { background-color: #6c1d8f; }
 
-/* -------- Catálogo -------- */
-.catalogo-card a { text-decoration: none; color: inherit; }
-
-.catalogo-section h1 {
-  text-align: center;  
-  font-weight: bold;     
-  width: 100%;              
-  margin: 70px auto 70px;           
-}
-
-.filmes { display: flex; flex-wrap: wrap; gap: 20px; }
-.catalogo-grid {
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
-  gap: 50px 90px;
-  margin: 20px;
-  padding: 0 100px 70px;
-}
-.catalogo-card {
-  background: #230a35;
-  border-radius: 10px;
-  text-align: center;
-  padding: 13px;
-  color: #fff;
-  max-width: 200px;
-  position: relative;
-  transition: .3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.catalogo-card:hover {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,.6);
-}
-.catalogo-card img { width: 100%; border-radius: 8px; margin-bottom: 10px; }
-.catalogo-card h1, .catalogo-card h3 {
-  margin: 0 auto;
-  text-align: center;
-  color: #fff;
-  text-decoration: none;
-  border: none;
-}
-
-/* Badges */
-.badge-circle {
-  display: flex; align-items: center; justify-content: center;
-  width: 30px; height: 30px;
-  background: #f6400998;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 1.2rem; font-weight: bold;
-  position: absolute; top: 8px; left: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,.5);
-}
-
-/* -------- Footer -------- */
+/* Footer */
 .footer {
   background: #180326;
   color: #fff;
@@ -256,7 +266,6 @@ main.transparent { opacity: .2; pointer-events: none; }
   font-size: .9rem;
   border-top: 1px solid #8925b4;
 }
-
 
 /* -------- Responsividade -------- */
 @media (max-width: 1024px) {
