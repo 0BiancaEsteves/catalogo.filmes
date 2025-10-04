@@ -14,7 +14,6 @@
              (focus)="buscaAtiva = true"
              (blur)="buscaAtiva = termoBusca.length > 0"
              (ngModelChange)="buscar()">
-      <span class="search-icon">🔍</span>
     </div>
 
     <!-- Botão de logout -->
@@ -63,7 +62,7 @@
 <!-- Catálogo de filmes dentro do main -->
 <main [class.transparent]="buscaAtiva">
   <section class="catalogo-section filmes">
-    <h2>Filmes mais populares</h2>
+    <h1>Filmes mais populares</h1>
     <div class="catalogo-grid">
       <div *ngFor="let filme of filmesFiltrados" class="catalogo-card">
         <a [routerLink]="['/filme', filme.id]">
@@ -78,7 +77,7 @@
 
 <footer class="footer">
   <div>
-    <p>© 2025 Catálogos Ford</p>
+    <p>© 2025 Catálogos dashboard</p>
   </div>
 </footer>
 
