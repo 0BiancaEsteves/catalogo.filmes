@@ -1,9 +1,7 @@
-<!-- Dashboard / Catálogo de Filmes -->
-
 <header class="header">
   <div class="header-left">
     <div class="logo">
-      <img src="/logo.png" alt="Logo">
+      <img src="/logo.png" alt="Logo" width="40px">
       <h1>Cátalogos</h1>
     </div>
   </div>
@@ -32,8 +30,19 @@
     <a [routerLink]="['/filme', filme.id]">
       <img [src]="'https://image.tmdb.org/t/p/w200' + filme.poster_path" [alt]="filme.title">
       <h3>{{ filme.title }}</h3>
-      <span class="classificacao" [ngClass]="getClassificacaoColor(filme.classificacao)">
-        {{ filme.classificacao || 'N/A' }}
+
+      <!-- Classificação somente se existir -->
+      <span *ngIf="filme.classificacao" class="classificacao"
+            [ngClass]="{
+              'livre': filme.classificacao === 'L',
+              'dez': filme.classificacao === '10',
+              'doze': filme.classificacao === '12',
+              'quatorze': filme.classificacao === '14',
+              'dezesseis': filme.classificacao === '16',
+              'dezoito': filme.classificacao === '18',
+              'sem-classificacao': filme.classificacao === 'Sem'
+            }">
+        {{ filme.classificacao }}
       </span>
     </a>
   </div>
@@ -73,8 +82,18 @@
           <div class="badge-circle">🔥</div>
           <img [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" [alt]="filme.title">
           <h3>{{ filme.title }}</h3>
-          <span class="classificacao" [ngClass]="getClassificacaoColor(filme.classificacao)">
-            {{ filme.classificacao || 'N/A' }}
+
+          <!-- Classificação somente se existir -->
+          <span *ngIf="filme.classificacao" class="classificacao"
+                [ngClass]="{
+                  'livre': filme.classificacao === 'L',
+                  'dez': filme.classificacao === '10',
+                  'doze': filme.classificacao === '12',
+                  'quatorze': filme.classificacao === '14',
+                  'dezesseis': filme.classificacao === '16',
+                  'dezoito': filme.classificacao === '18',
+                }">
+            {{ filme.classificacao }}
           </span>
         </a>
       </div>
@@ -85,4 +104,3 @@
 <footer class="footer">
   <p>© 2025 Catálogos dashboard</p>
 </footer>
-

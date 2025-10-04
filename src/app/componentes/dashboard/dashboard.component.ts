@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       next: (res: any) => {
         this.filmes = res.results;
         this.filmesFiltrados = this.filmes.slice(0, 20);
-        this.filmesPopulares = this.filmes.slice(0, 5);
+        this.filmesPopulares = this.filmes.slice(0, 5);//carousel
 
         // Puxar classificação indicativa de cada filme
         this.filmesFiltrados.forEach((filme: any) => {
