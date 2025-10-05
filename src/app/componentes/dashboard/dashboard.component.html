@@ -1,13 +1,15 @@
+<!-- Header -->
 <header class="header">
   <div class="header-left">
+    <!-- Hamburger apenas em telas pequenas -->
+    <div class="menu-icon" (click)="toggleSidebar()">☰</div>
+
     <div class="logo">
-      <img src="/logo.png" alt="Logo" width="40px">
       <h1>Cátalogos</h1>
     </div>
   </div>
 
   <div class="header-right">
-    <!-- Caixa de busca -->
     <div class="search-box">
       <input type="text" placeholder="Buscar"
              [(ngModel)]="termoBusca"
@@ -16,13 +18,19 @@
              (ngModelChange)="buscar()">
     </div>
 
-    <!-- Botão de logout -->
     <button class="logout-btn" (click)="logout()">Sair</button>
   </div>
 </header>
 
+<!-- Sidebar / Menu lateral -->
+<div class="sidebar" [class.active]="sidebarAtiva">
+  <button class="close-btn" (click)="toggleSidebar()">✖</button>
+  <button class="sidebar-btn" (click)="logout()">Logout</button>
+  <button class="sidebar-btn" (click)="goToHome()">Home</button>
+</div>
+
 <!-- Overlay transparente -->
-<div class="overlay" *ngIf="buscaAtiva"></div>
+<div class="overlay" *ngIf="sidebarAtiva || buscaAtiva" (click)="sidebarAtiva = false; buscaAtiva = false;"></div>
 
 <!-- Resultados filtrados -->
 <div class="resultados-busca" *ngIf="buscaAtiva && filmesFiltrados.length > 0">
@@ -30,20 +38,6 @@
     <a [routerLink]="['/filme', filme.id]">
       <img [src]="'https://image.tmdb.org/t/p/w200' + filme.poster_path" [alt]="filme.title">
       <h3>{{ filme.title }}</h3>
-
-      <!-- Classificação somente se existir -->
-      <span *ngIf="filme.classificacao" class="classificacao"
-            [ngClass]="{
-              'livre': filme.classificacao === 'L',
-              'dez': filme.classificacao === '10',
-              'doze': filme.classificacao === '12',
-              'quatorze': filme.classificacao === '14',
-              'dezesseis': filme.classificacao === '16',
-              'dezoito': filme.classificacao === '18',
-              'sem-classificacao': filme.classificacao === 'Sem'
-            }">
-        {{ filme.classificacao }}
-      </span>
     </a>
   </div>
 </div>
@@ -85,14 +79,7 @@
 
           <!-- Classificação somente se existir -->
           <span *ngIf="filme.classificacao" class="classificacao"
-                [ngClass]="{
-                  'livre': filme.classificacao === 'L',
-                  'dez': filme.classificacao === '10',
-                  'doze': filme.classificacao === '12',
-                  'quatorze': filme.classificacao === '14',
-                  'dezesseis': filme.classificacao === '16',
-                  'dezoito': filme.classificacao === '18',
-                }">
+                [ngClass]="getClassificacaoColor(filme.classificacao)">
             {{ filme.classificacao }}
           </span>
         </a>
@@ -104,3 +91,4 @@
 <footer class="footer">
   <p>© 2025 Catálogos dashboard</p>
 </footer>
+

@@ -18,14 +18,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
   filmesPopulares: any[] = [];
   termoBusca: string = '';
 
-  private apiKey: string = ''; // COLOQUE SUA CHAVE AQUI
+  private apiKey: string = 'COLOQUE A SENHA AQUI!'; // COLOQUE SUA CHAVE AQUI
   private apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=pt-BR&page=1`;
 
   currentIndex: number = 0;
   autoSlideInterval: any;
   buscaAtiva = false;
-
+  sidebarAtiva: boolean = false; // controla sidebar
+  
   constructor(private http: HttpClient, private router: Router) {}
+toggleSidebar() {
+  this.sidebarAtiva = !this.sidebarAtiva; // alterna entre aberto e fechado
+}
+
+goToHome() {
+  alert('A Home ainda está em desenvolvimento!');
+}
+
 
   ngOnInit(): void {
     // Buscar filmes populares
@@ -102,6 +111,3 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.autoSlideInterval) clearInterval(this.autoSlideInterval);
   }
 }
-
-
-

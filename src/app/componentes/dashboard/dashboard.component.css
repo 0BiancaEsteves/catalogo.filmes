@@ -31,6 +31,7 @@ main {
 
 .logo h1 {
   margin: 0;
+  padding: 0 0 0 40px;
   font-size: 1.8rem;
   font-weight: bold;
   color: #fff;
@@ -129,6 +130,44 @@ main.transparent { opacity: .2; pointer-events: none; }
   margin: 0;
   color: #fff;
   text-align: center;
+}
+
+/* Hamburger apenas em telas pequenas */
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #fff;
+}
+
+/* Sidebar padrão: escondido no mobile */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -220px; /* escondido */
+  width: 220px;
+  height: 100%;
+  background-color: #180326;
+  color: #fff;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 1500;
+}
+
+/* Quando ativo, aparece */
+.sidebar.active {
+  left: -10px;
+}
+
+/* Botão fechar */
+.close-btn {
+  display: block;
+  margin: 10px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
 }
 
 /* -------- Catálogo de filmes -------- */
@@ -299,6 +338,16 @@ main.transparent { opacity: .2; pointer-events: none; }
   .logo h1 { width: 20px; font-size: 1.1rem; }
   .search-box input { font-size: 0.75rem; padding: 100px 30px 5px 8px; }
   .logout-btn { padding: 6px 8px; font-size: 0.7rem; margin: auto;}
+}
+
+@media (max-width: 768px) {
+  .menu-icon { display: block; }
+  .header-right .logout-btn { display: none; }
+  .search-box input { width: 140px; padding: 6px 35px 6px 8px; font-size: 0.85rem; }
+}
+
+@media (max-width: 480px) {
+  .search-box input { width: 120px; padding: 5px 30px 5px 8px; font-size: 0.8rem; }
 }
 
 /* --- HEADER RESPONSIVO FINAL AJUSTADO --- */
