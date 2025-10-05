@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './componentes/login/login.component';
 import { DashboardComponent } from './componentes/dashboard/dashboard.component';
 import { SobreFilmesComponent } from './componentes/sobre-filmes/sobre-filmes.component';
+import { HomeComponent } from './componentes/home/home.component';
 
 export const routes: Routes = [
   // Rota padrão para o login
@@ -11,4 +12,7 @@ export const routes: Routes = [
   // Rota para o dashboard
   { path: 'dashboard', component: DashboardComponent },
   { path: 'filme/:id', component: SobreFilmesComponent },
+
+  //Rota para a home
+  { path: 'home', component: HomeComponent }
 ];

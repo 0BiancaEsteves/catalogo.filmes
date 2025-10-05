@@ -32,6 +32,7 @@ toggleSidebar() {
 }
 
 goToHome() {
+  this.router.navigate(['/home'])
   alert('A Home ainda está em desenvolvimento!');
 }
 
