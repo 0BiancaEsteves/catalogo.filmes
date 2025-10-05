@@ -1,1 +1,92 @@
-<p>home works!</p>
+<!-- Header -->
+<header class="header">
+  <div class="header-left">
+    <!-- Hamburger apenas em telas pequenas -->
+    <div class="menu-icon" (click)="toggleSidebar()">☰</div>
+
+    <div class="logo">
+      <h1>Cátalogos</h1>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="search-box">
+      <input type="text" placeholder="Buscar"
+             [(ngModel)]="termoBusca"
+             (focus)="buscaAtiva = true"
+             (blur)="buscaAtiva = termoBusca.length > 0"
+             (ngModelChange)="buscar()">
+    </div>
+
+    <button class="logout-btn" (click)="logout()">Sair</button>
+  </div>
+</header>
+
+<!-- Sidebar / Menu lateral -->
+<div class="sidebar" [class.active]="sidebarAtiva">
+  <button class="close-btn" (click)="toggleSidebar()">✖</button>
+  <button class="sidebar-btn" (click)="logout()">Logout</button>
+  <button class="sidebar-btn" (click)="goToHome()">Dashboard</button>
+</div>
+
+<!-- Overlay transparente -->
+<div class="overlay" *ngIf="sidebarAtiva || buscaAtiva" (click)="sidebarAtiva = false; buscaAtiva = false;"></div>
+
+<!-- Resultados filtrados -->
+<div class="resultados-busca" *ngIf="buscaAtiva && filmesFiltrados.length > 0">
+  <div *ngFor="let filme of filmesFiltrados" class="resultado-card">
+    <a [routerLink]="['/filme', filme.id]">
+      <img [src]="'https://image.tmdb.org/t/p/w200' + filme.poster_path" [alt]="filme.title">
+      <h3>{{ filme.title }}</h3>
+    </a>
+  </div>
+</div>
+
+<!-- Carrossel -->
+<div class="carousel">
+  <div class="carousel-image">
+    <ng-container *ngIf="filmesCarrossel.length > 0">
+      <img [src]="'https://image.tmdb.org/t/p/original' + filmesCarrossel[currentIndex]?.backdrop_path"
+           [alt]="filmesCarrossel[currentIndex]?.title">
+
+      <div class="carousel-caption">
+        <h2>{{ filmesCarrossel[currentIndex]?.title }}</h2>
+        <p>{{ filmesCarrossel[currentIndex]?.overview }}</p>
+        <a [routerLink]="['/filme', filmesCarrossel[currentIndex]?.id]">
+          <button class="detalhes-btn">Ver Detalhes</button>
+        </a>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="carousel-dots">
+    <span *ngFor="let filme of filmesCarrossel; let i = index"
+          (click)="goToSlide(i)"
+          [class.active]="i === currentIndex"></span>
+  </div>
+</div>
+
+<!-- Catálogo de filmes -->
+<main [class.transparent]="buscaAtiva">
+  <section class="catalogo-section filmes">
+    <h1>Todos os Filmes</h1>
+    <div class="catalogo-grid">
+      <div *ngFor="let filme of filmesFiltrados" class="catalogo-card">
+        <a [routerLink]="['/filme', filme.id]">
+          <div class="badge-circle">🔥</div>
+          <img [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" [alt]="filme.title">
+          <h3>{{ filme.title }}</h3>
+
+          <span *ngIf="filme.classificacao" class="classificacao"
+                [ngClass]="getClassificacaoColor(filme.classificacao)">
+            {{ filme.classificacao }}
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>© 2025 Catálogos home</p>
+</footer>

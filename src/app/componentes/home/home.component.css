@@ -1,0 +1,385 @@
+/* -------- Fundo --------- */
+main {
+  color: #fff;
+  margin: 0;
+  padding-top: 80px; /* altura do header */
+}
+
+/* -------- Header -------- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: #180326;
+  border-bottom: 2px solid #8925b4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  z-index: 1000;
+  flex-wrap: auto; /* permite quebrar linhas em telas pequenas */
+}
+
+.header div div h1 {
+  margin: 0;
+  padding-left: 40px; /* igual ao Dashboard */
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  flex: 1 1 auto;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: flex-end; /* mantém ícone na mesma linha, título descendo */
+  gap: 10px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 500px;
+}
+
+.header-left h1 {
+  margin: 0;
+  padding-bottom: 10px 15px; /* desce o texto um pouco */
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+
+/* Menu Hamburger */
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #fff;
+}
+
+/* Search Box */
+.search-box input {
+  width: 100%;
+  padding: 10px 100px 10px 10px;
+  border-radius: 25px;
+  border: 2px solid #6c1d8f;
+  outline: none;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-box input:hover {
+  border: 2px solid #3c0d50;
+}
+
+/* Botão Logout */
+.logout-btn {
+  padding: 15px 15px;
+  margin: 2rem 5rem;
+  border-radius: 50%;
+  border: none;
+  background: #8925b4;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.logout-btn:hover {
+  background: #6c1d8f;
+}
+/* -------- Overlay ------- */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.7);
+  z-index: 1000;
+}
+
+main.transparent {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+/* ---- Resultados Busca --- */
+.resultados-busca {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: rgba(0,0,0,.95);
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 1001;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
+  gap: 15px;
+}
+
+.resultado-card {
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.resultado-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.resultado-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.resultado-card h3 {
+  margin: 0;
+  color: #fff;
+  text-align: center;
+}
+
+/* -------- Sidebar -------- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -220px;
+  width: 220px;
+  height: 100%;
+  background-color: #180326;
+  color: #fff;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 1500;
+}
+
+.sidebar.active {
+  left: -10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+.sidebar-btn {
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #8925b4;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+  display: block;
+}
+
+.sidebar-btn:hover {
+  background: #6c1d8f;
+}
+
+/* ---- Catálogo Filmes ---- */
+.catalogo-section h1 {
+  text-align: center;
+  font-weight: bold;
+  margin: 70px auto 70px;
+}
+
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 30px;
+  padding: 0 50px 70px;
+}
+
+.catalogo-card {
+  background: #230a35;
+  border-radius: 10px;
+  text-align: center;
+  padding: 13px;
+  color: #fff;
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.catalogo-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,.6);
+}
+
+.catalogo-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.catalogo-card h3 {
+  margin: 5px 0;
+}
+
+.catalogo-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Classificação Indicativa */
+.classificacao {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+.classificacao.livre { background-color: #28a745; }
+.classificacao.dez { background-color: #007bff; }
+.classificacao.doze { background-color: #ffc107; }
+.classificacao.quatorze { background-color: #ff7f50; }
+.classificacao.dezesseis { background-color: #dc3545; }
+.classificacao.dezoito { background-color: #000; }
+
+/* Badge de destaque */
+.badge-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: #f6400998;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.5);
+}
+
+/* -------- Carrossel ------ */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 100px);
+  top: 100px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-image img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 8%;
+  left: 4%;
+  background: rgba(0,0,0,.6);
+  padding: 15px 20px;
+  border-radius: 8px;
+  color: #fff;
+  max-width: 400px;
+  backdrop-filter: blur(3px);
+  box-shadow: 0 2px 15px rgba(0,0,0,.4);
+}
+
+.carousel-caption h2 {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.carousel-caption p {
+  margin-bottom: 12px;
+  font-size: .95rem;
+  line-height: 1.3;
+}
+
+/* Botão "Ver Detalhes" */
+.detalhes-btn {
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #8925b4;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.detalhes-btn:hover {
+  background-color: #6c1d8f;
+}
+
+/* -------- Footer -------- */
+.footer {
+  background: #180326;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: .9rem;
+  border-top: 1px solid #8925b4;
+}
+
+
+/* -------- Responsividade -------- */
+@media (max-width: 1200px) { .catalogo-grid { grid-template-columns: repeat(4,1fr); gap: 20px; } }
+@media (max-width: 1024px) { .catalogo-grid { grid-template-columns: repeat(3,1fr); gap: 18px; } }
+@media (max-width: 768px) {
+  .catalogo-grid { grid-template-columns: repeat(2,1fr); gap: 15px; padding: 0 20px 50px; }
+  .header { height: auto; padding: 10px 15px; }
+  .header-right { width: 100%; margin-top: 8px; }
+  .menu-icon { display: block; }
+  .header-right .logout-btn { display: none; }
+  .search-box input { width: 140px; padding: 6px 25px 6px 8px; font-size: 0.85rem; }
+}
+@media (max-width: 480px) {
+  .catalogo-grid { padding: 0 10px 50px; }
+  .search-box input { width: 120px; padding: 5px 20px 5px 8px; font-size: 0.8rem; }
+  .logout-btn { padding: 6px 8px; font-size: 0.75rem; display: inline-block; }
+}
