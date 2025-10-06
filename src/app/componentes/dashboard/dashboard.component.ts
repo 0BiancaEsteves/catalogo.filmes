@@ -33,7 +33,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   goToHome() {
     this.router.navigate(['/home'])
-    alert('A Home ainda está em desenvolvimento!');
   }
 
   ngOnInit(): void {
