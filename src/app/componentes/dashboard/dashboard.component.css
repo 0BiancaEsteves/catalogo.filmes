@@ -47,8 +47,11 @@ main {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 500px;
+  gap: 20px;
+  justify-content: flex-end;
+  padding-right: 30px; /* move todo o grupo (input + botão) um pouco para direita */
 }
+
 
 .header-left h1 {
   margin: 0;
@@ -68,13 +71,21 @@ main {
 }
 
 /* Search Box */
+.search-box {
+  display: flex;
+  justify-content: center;
+}
+
 .search-box input {
-  width: 100%;
+  display: block;             /* Necessário para que o margin auto funcione */
+  margin: 0 auto;             /* Centraliza horizontalmente */
+  width: 300px;               /* Define uma largura fixa */
+  max-width: 100%;            /* Ajusta o tamanho máximo, se necessário */
   padding: 10px 100px 10px 10px;
   border-radius: 25px;
   border: 2px solid #6c1d8f;
   outline: none;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   color: #fff;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -86,9 +97,8 @@ main {
 
 /* Botão Logout */
 .logout-btn {
-  padding: 15px 15px;
-  margin: 2rem 5rem;
-  border-radius: 50%;
+  padding: 12px 18px;
+  border-radius: 25px;
   border: none;
   background: #8925b4;
   color: #fff;
@@ -96,12 +106,10 @@ main {
   cursor: pointer;
   transition: 0.3s;
   white-space: nowrap;
-  flex-shrink: 0;
 }
 
-.logout-btn:hover {
-  background: #6c1d8f;
-}
+
+.logout-btn:hover {background: #6c1d8f;}
 /* -------- Overlay ------- */
 .overlay {
   position: fixed;

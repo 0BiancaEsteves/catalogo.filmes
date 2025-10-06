@@ -35,7 +35,7 @@
 <!-- Resultados filtrados -->
 <div class="resultados-busca" *ngIf="buscaAtiva && filmesFiltrados.length > 0">
   <div *ngFor="let filme of filmesFiltrados" class="resultado-card">
-    <a [routerLink]="['/filme', filme.id]">
+    <a [routerLink]="['/sobre-filmes', 'filme', filme.id]">
       <img [src]="'https://image.tmdb.org/t/p/w200' + filme.poster_path" [alt]="filme.title">
       <h3>{{ filme.title }}</h3>
     </a>
@@ -52,7 +52,7 @@
       <div class="carousel-caption">
         <h2>{{ filmesPopulares[currentIndex]?.title }}</h2>
         <p>{{ filmesPopulares[currentIndex]?.overview }}</p>
-        <a [routerLink]="['/filme', filmesPopulares[currentIndex]?.id]">
+        <a [routerLink]="['/sobre-filmes', 'filme', filmesPopulares[currentIndex]?.id]">
           <button class="detalhes-btn">Ver Detalhes</button>
         </a>
       </div>
@@ -72,7 +72,7 @@
     <h1>Filmes mais populares</h1>
     <div class="catalogo-grid">
       <div *ngFor="let filme of filmesFiltrados" class="catalogo-card">
-        <a [routerLink]="['/filme', filme.id]">
+        <a [routerLink]="['/sobre-filmes', 'filme', filme.id]">
           <div class="badge-circle">🔥</div>
           <img [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" [alt]="filme.title">
           <h3>{{ filme.title }}</h3>
@@ -91,4 +91,3 @@
 <footer class="footer">
   <p>© 2025 Catálogos dashboard</p>
 </footer>
-

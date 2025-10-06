@@ -41,8 +41,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
-    this.fetchItems();
-    this.fetchCarrossel();
+    this.fetchItems(); // Inicializa o carregamento dos itens
   }
 
   fetchItems(): void {
@@ -65,12 +64,14 @@ export class HomeComponent implements OnInit, OnDestroy {
           };
         });
 
+        // Filtra os filmes, séries e animes
         this.filmes = this.allItems.filter(i => i.type === 'filme');
         this.series = this.allItems.filter(i => i.type === 'serie');
         this.animes = this.allItems.filter(i => i.type === 'anime');
 
+        // Preenche a classificação de filmes
         this.allItems.forEach(item => {
-          if(item.type === 'filme') {
+          if (item.type === 'filme') {
             this.getClassificacao(item.id).subscribe((data: any) => {
               const br = data.results.find((r: any) => r.iso_3166_1 === 'BR');
               item.classificacao = br ? br.release_dates[0].certification || 'N/A' : 'N/A';
@@ -79,23 +80,25 @@ export class HomeComponent implements OnInit, OnDestroy {
             item.classificacao = 'N/A';
           }
         });
+
+        // Agora chama o método para popular o carrossel com os primeiros filmes
+        this.fetchCarrossel();
       },
       error: (err) => console.error('Erro ao buscar itens:', err)
     });
   }
 
   fetchCarrossel(): void {
-    this.http.get<any>(this.carrosselUrl).subscribe({
-      next: (res) => {
-        this.filmesCarrossel = res.results.slice(0, 5);
-        this.iniciarCarrossel();
-      },
-      error: (err) => console.error('Erro ao buscar carrossel:', err)
-    });
+    // Preenche o carrossel com os primeiros 5 filmes
+    this.filmesCarrossel = this.filmes.slice(0, 5);
+
+    // Verifique se há filmes para o carrossel antes de iniciar
+    if (this.filmesCarrossel.length > 0) {
+      this.iniciarCarrossel();  // Inicia o carrossel
+    }
   }
 
   getLink(item: Item): string[] {
-    // Sempre usar rota unificada
     return ['/sobre-filmes', item.type, item.id.toString()];
   }
 
@@ -105,7 +108,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   buscar(): void {
     const termo = this.termoBusca.toLowerCase();
-    if(!this.termoBusca) {
+    if (!this.termoBusca) {
       this.filmes = this.allItems.filter(i => i.type === 'filme');
       this.series = this.allItems.filter(i => i.type === 'serie');
       this.animes = this.allItems.filter(i => i.type === 'anime');
@@ -116,12 +119,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  get resultadosBuscaUnificados() {
+    // Combina filmes e séries na busca
+    return [...this.filmes, ...this.series];
+  }
+
   getClassificacao(filmeId: number) {
     return this.http.get(`https://api.themoviedb.org/3/movie/${filmeId}/release_dates?api_key=${this.apiKey}&language=pt-BR`);
   }
 
   getClassificacaoColor(classificacao: string) {
-    switch(classificacao) {
+    switch (classificacao) {
       case 'L': return 'livre';
       case '10': return 'dez';
       case '12': return 'doze';
@@ -133,16 +141,20 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   iniciarCarrossel(): void {
-    this.autoSlideInterval = setInterval(() => this.goToSlide(this.currentIndex + 1), 5000);
+    // Inicia o intervalo automático do carrossel
+    if (this.filmesCarrossel.length === 0) return;
+    this.autoSlideInterval = setInterval(() => {
+      this.goToSlide(this.currentIndex + 1);
+    }, 5000);  // Troca de slide a cada 5 segundos
   }
 
   goToSlide(index: number): void {
     const total = this.filmesCarrossel.length;
-    if(total === 0) return;
-    this.currentIndex = (index + total) % total;
+    this.currentIndex = (index + total) % total;  // Garantir que o índice esteja no intervalo
   }
 
   ngOnDestroy(): void {
-    if(this.autoSlideInterval) clearInterval(this.autoSlideInterval);
+    if (this.autoSlideInterval) clearInterval(this.autoSlideInterval);  // Limpa o intervalo ao destruir o componente
   }
 }
+

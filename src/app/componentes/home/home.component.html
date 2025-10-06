@@ -30,58 +30,29 @@
 <div class="overlay" *ngIf="sidebarAtiva || buscaAtiva" (click)="sidebarAtiva = false; buscaAtiva = false;"></div>
 
 <!-- Resultados filtrados -->
-<div class="resultados-busca" *ngIf="buscaAtiva && (filmes.length || series.length || animes.length)">
+<div class="resultados-busca" *ngIf="buscaAtiva && resultadosBuscaUnificados.length > 0">
   <h2>Resultados da busca</h2>
 
-  <!-- Filmes -->
-  <div *ngIf="filmes.length > 0">
-    <h3>Filmes</h3>
-    <div class="catalogo-grid">
-      <div *ngFor="let filme of filmes" class="catalogo-card">
-        <a [routerLink]="getLink(filme)">
-          <img [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" [alt]="filme.title">
-          <h3>{{ filme.title }}</h3>
-          <span *ngIf="filme.classificacao" class="classificacao"
-                [ngClass]="getClassificacaoColor(filme.classificacao)">
-            {{ filme.classificacao }}
-          </span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Séries -->
-  <div *ngIf="series.length > 0">
-    <h3>Séries</h3>
-    <div class="catalogo-grid">
-      <div *ngFor="let serie of series" class="catalogo-card">
-        <a [routerLink]="getLink(serie)">
-          <img [src]="'https://image.tmdb.org/t/p/w500' + serie.poster_path" [alt]="serie.title">
-          <h3>{{ serie.title }}</h3>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Animes -->
-  <div *ngIf="animes.length > 0">
-    <h3>Animes</h3>
-    <div class="catalogo-grid">
-      <div *ngFor="let anime of animes" class="catalogo-card">
-        <a [routerLink]="getLink(anime)">
-          <img [src]="'https://image.tmdb.org/t/p/w500' + anime.poster_path" [alt]="anime.title">
-          <h3>{{ anime.title }}</h3>
-        </a>
-      </div>
+  <div class="catalogo-grid">
+    <div *ngFor="let item of resultadosBuscaUnificados" class="catalogo-card">
+      <a [routerLink]="getLink(item)">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" [alt]="item.title">
+        <h3>{{ item.title }}</h3>
+        <span *ngIf="item.classificacao" class="classificacao"
+              [ngClass]="getClassificacaoColor(item.classificacao)">
+          {{ item.classificacao }}
+        </span>
+      </a>
     </div>
   </div>
 </div>
 
 <!-- Carrossel -->
-<div class="carousel">
-  <div class="carousel-image" *ngIf="filmesCarrossel.length > 0">
-    <img [src]="'https://image.tmdb.org/t/p/original' + filmesCarrossel[currentIndex]?.backdrop_path"
+<div class="carousel" *ngIf="filmesCarrossel.length > 0">
+  <div class="carousel-image">
+    <img [src]="'https://image.tmdb.org/t/p/original' + filmesCarrossel[currentIndex]?.backdrop_path" 
          [alt]="filmesCarrossel[currentIndex]?.title">
+
     <div class="carousel-caption">
       <h2>{{ filmesCarrossel[currentIndex]?.title }}</h2>
       <p>{{ filmesCarrossel[currentIndex]?.overview }}</p>
@@ -90,6 +61,7 @@
       </a>
     </div>
   </div>
+
   <div class="carousel-dots">
     <span *ngFor="let filme of filmesCarrossel; let i = index"
           (click)="goToSlide(i)"

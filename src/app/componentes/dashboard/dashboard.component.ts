@@ -1,4 +1,3 @@
-// dashboard.component.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -27,15 +26,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   sidebarAtiva: boolean = false; // controla sidebar
   
   constructor(private http: HttpClient, private router: Router) {}
-toggleSidebar() {
-  this.sidebarAtiva = !this.sidebarAtiva; // alterna entre aberto e fechado
-}
 
-goToHome() {
-  this.router.navigate(['/home'])
-  alert('A Home ainda está em desenvolvimento!');
-}
+  toggleSidebar() {
+    this.sidebarAtiva = !this.sidebarAtiva; // alterna entre aberto e fechado
+  }
 
+  goToHome() {
+    this.router.navigate(['/home'])
+    alert('A Home ainda está em desenvolvimento!');
+  }
 
   ngOnInit(): void {
     // Buscar filmes populares
@@ -43,7 +42,7 @@ goToHome() {
       next: (res: any) => {
         this.filmes = res.results;
         this.filmesFiltrados = this.filmes.slice(0, 20);
-        this.filmesPopulares = this.filmes.slice(0, 5);//carousel
+        this.filmesPopulares = this.filmes.slice(0, 5); // carrossel
 
         // Puxar classificação indicativa de cada filme
         this.filmesFiltrados.forEach((filme: any) => {
@@ -102,13 +101,12 @@ goToHome() {
     }
   }
 
-  // Logout
-  logout(): void {
-    this.router.navigate(['/login']);
+  // Destruir o carrossel ao sair da tela
+  ngOnDestroy(): void {
+    clearInterval(this.autoSlideInterval);
   }
 
-  // Limpar intervalo do carrossel
-  ngOnDestroy(): void {
-    if (this.autoSlideInterval) clearInterval(this.autoSlideInterval);
+  logout() {
+    this.router.navigate(['/login'])
   }
 }

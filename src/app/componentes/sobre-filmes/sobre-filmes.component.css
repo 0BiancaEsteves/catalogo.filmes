@@ -101,10 +101,10 @@
 .botao-voltar {
   display: inline-block;
   margin-top: 30px;
-  padding: 10px 20px;
+  padding: 15px 20px;
   background: #6c1d8f;
   color: white;
-  border-radius: 5px;
+  border-radius: 20px;
   text-decoration: none;
   transition: 0.3s;
 }
@@ -113,13 +113,14 @@
 .botao-voltar2{
   display: inline-block;
   margin-top: 30px;
-  padding: 10px 20px;
+  padding: 15px 36px;
   background: #6c1d8f;
   color: white;
-  border-radius: 5px;
+  border-radius: 20px;
   text-decoration: none;
   transition: 0.3s;
 }
+.botao-voltar2:hover {background: #4b1362;}
 
 .carregando {
   text-align: center;
