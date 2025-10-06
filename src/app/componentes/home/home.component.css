@@ -69,8 +69,9 @@ main {
 
 /* Search Box */
 .search-box input {
-  width: 100%;
-  padding: 10px 100px 10px 10px;
+  width: 300px;
+  max-width: 100%;
+  padding: 10px 20px;
   border-radius: 25px;
   border: 2px solid #6c1d8f;
   outline: none;
@@ -80,8 +81,9 @@ main {
   transition: all 0.3s ease;
 }
 
-.search-box input:hover {
-  border: 2px solid #3c0d50;
+.search-box input:focus {
+  border-color: #8925b4;
+  background: rgba(0,0,0,0.7);
 }
 
 /* Botão Logout */

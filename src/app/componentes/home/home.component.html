@@ -1,9 +1,7 @@
 <!-- Header -->
 <header class="header">
   <div class="header-left">
-    <!-- Hamburger apenas em telas pequenas -->
     <div class="menu-icon" (click)="toggleSidebar()">☰</div>
-
     <div class="logo">
       <h1>Cátalogos</h1>
     </div>
@@ -17,66 +15,32 @@
              (blur)="buscaAtiva = termoBusca.length > 0"
              (ngModelChange)="buscar()">
     </div>
-
     <button class="logout-btn" (click)="logout()">Sair</button>
   </div>
 </header>
 
-<!-- Sidebar / Menu lateral -->
+<!-- Sidebar -->
 <div class="sidebar" [class.active]="sidebarAtiva">
   <button class="close-btn" (click)="toggleSidebar()">✖</button>
   <button class="sidebar-btn" (click)="logout()">Logout</button>
   <button class="sidebar-btn" (click)="goToHome()">Dashboard</button>
 </div>
 
-<!-- Overlay transparente -->
+<!-- Overlay -->
 <div class="overlay" *ngIf="sidebarAtiva || buscaAtiva" (click)="sidebarAtiva = false; buscaAtiva = false;"></div>
 
 <!-- Resultados filtrados -->
-<div class="resultados-busca" *ngIf="buscaAtiva && filmesFiltrados.length > 0">
-  <div *ngFor="let filme of filmesFiltrados" class="resultado-card">
-    <a [routerLink]="['/filme', filme.id]">
-      <img [src]="'https://image.tmdb.org/t/p/w200' + filme.poster_path" [alt]="filme.title">
-      <h3>{{ filme.title }}</h3>
-    </a>
-  </div>
-</div>
+<div class="resultados-busca" *ngIf="buscaAtiva && (filmes.length || series.length || animes.length)">
+  <h2>Resultados da busca</h2>
 
-<!-- Carrossel -->
-<div class="carousel">
-  <div class="carousel-image">
-    <ng-container *ngIf="filmesCarrossel.length > 0">
-      <img [src]="'https://image.tmdb.org/t/p/original' + filmesCarrossel[currentIndex]?.backdrop_path"
-           [alt]="filmesCarrossel[currentIndex]?.title">
-
-      <div class="carousel-caption">
-        <h2>{{ filmesCarrossel[currentIndex]?.title }}</h2>
-        <p>{{ filmesCarrossel[currentIndex]?.overview }}</p>
-        <a [routerLink]="['/filme', filmesCarrossel[currentIndex]?.id]">
-          <button class="detalhes-btn">Ver Detalhes</button>
-        </a>
-      </div>
-    </ng-container>
-  </div>
-
-  <div class="carousel-dots">
-    <span *ngFor="let filme of filmesCarrossel; let i = index"
-          (click)="goToSlide(i)"
-          [class.active]="i === currentIndex"></span>
-  </div>
-</div>
-
-<!-- Catálogo de filmes -->
-<main [class.transparent]="buscaAtiva">
-  <section class="catalogo-section filmes">
-    <h1>Todos os Filmes</h1>
+  <!-- Filmes -->
+  <div *ngIf="filmes.length > 0">
+    <h3>Filmes</h3>
     <div class="catalogo-grid">
-      <div *ngFor="let filme of filmesFiltrados" class="catalogo-card">
-        <a [routerLink]="['/filme', filme.id]">
-          <div class="badge-circle">🔥</div>
+      <div *ngFor="let filme of filmes" class="catalogo-card">
+        <a [routerLink]="getLink(filme)">
           <img [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" [alt]="filme.title">
           <h3>{{ filme.title }}</h3>
-
           <span *ngIf="filme.classificacao" class="classificacao"
                 [ngClass]="getClassificacaoColor(filme.classificacao)">
             {{ filme.classificacao }}
@@ -84,9 +48,120 @@
         </a>
       </div>
     </div>
+  </div>
+
+  <!-- Séries -->
+  <div *ngIf="series.length > 0">
+    <h3>Séries</h3>
+    <div class="catalogo-grid">
+      <div *ngFor="let serie of series" class="catalogo-card">
+        <a [routerLink]="getLink(serie)">
+          <img [src]="'https://image.tmdb.org/t/p/w500' + serie.poster_path" [alt]="serie.title">
+          <h3>{{ serie.title }}</h3>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animes -->
+  <div *ngIf="animes.length > 0">
+    <h3>Animes</h3>
+    <div class="catalogo-grid">
+      <div *ngFor="let anime of animes" class="catalogo-card">
+        <a [routerLink]="getLink(anime)">
+          <img [src]="'https://image.tmdb.org/t/p/w500' + anime.poster_path" [alt]="anime.title">
+          <h3>{{ anime.title }}</h3>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Carrossel -->
+<div class="carousel">
+  <div class="carousel-image" *ngIf="filmesCarrossel.length > 0">
+    <img [src]="'https://image.tmdb.org/t/p/original' + filmesCarrossel[currentIndex]?.backdrop_path"
+         [alt]="filmesCarrossel[currentIndex]?.title">
+    <div class="carousel-caption">
+      <h2>{{ filmesCarrossel[currentIndex]?.title }}</h2>
+      <p>{{ filmesCarrossel[currentIndex]?.overview }}</p>
+      <a [routerLink]="getLink(filmesCarrossel[currentIndex])">
+        <button class="detalhes-btn">Ver Detalhes</button>
+      </a>
+    </div>
+  </div>
+  <div class="carousel-dots">
+    <span *ngFor="let filme of filmesCarrossel; let i = index"
+          (click)="goToSlide(i)"
+          [class.active]="i === currentIndex"></span>
+  </div>
+</div>
+
+<!-- Catálogo completo -->
+<main [class.transparent]="buscaAtiva">
+
+  <!-- Todos os itens -->
+  <section class="catalogo-section todos" *ngIf="allItems.length > 0">
+    <h1>Todos</h1>
+    <div class="catalogo-grid">
+      <div *ngFor="let item of allItems" class="catalogo-card">
+        <a [routerLink]="getLink(item)">
+          <div class="badge-circle" *ngIf="item.popular">🔥</div>
+          <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" [alt]="item.title">
+          <h3>{{ item.title }}</h3>
+          <span *ngIf="item.classificacao" class="classificacao" [ngClass]="getClassificacaoColor(item.classificacao)">
+            {{ item.classificacao }}
+          </span>
+        </a>
+      </div>
+    </div>
   </section>
+
+  <!-- Filmes -->
+  <section class="catalogo-section filmes" *ngIf="filmes.length > 0">
+    <h1>Filmes</h1>
+    <div class="catalogo-grid">
+      <div *ngFor="let filme of filmes" class="catalogo-card">
+        <a [routerLink]="getLink(filme)">
+          <div class="badge-circle" *ngIf="filme.popular">🔥</div>
+          <img [src]="'https://image.tmdb.org/t/p/w500' + filme.poster_path" [alt]="filme.title">
+          <h3>{{ filme.title }}</h3>
+          <span *ngIf="filme.classificacao" class="classificacao" [ngClass]="getClassificacaoColor(filme.classificacao)">
+            {{ filme.classificacao }}
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Séries -->
+  <section class="catalogo-section series" *ngIf="series.length > 0">
+    <h1>Séries</h1>
+    <div class="catalogo-grid">
+      <div *ngFor="let serie of series" class="catalogo-card">
+        <a [routerLink]="getLink(serie)">
+          <img [src]="'https://image.tmdb.org/t/p/w500' + serie.poster_path" [alt]="serie.title">
+          <h3>{{ serie.title }}</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Animes -->
+  <section class="catalogo-section animes" *ngIf="animes.length > 0">
+    <h1>Animes</h1>
+    <div class="catalogo-grid">
+      <div *ngFor="let anime of animes" class="catalogo-card">
+        <a [routerLink]="getLink(anime)">
+          <img [src]="'https://image.tmdb.org/t/p/w500' + anime.poster_path" [alt]="anime.title">
+          <h3>{{ anime.title }}</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="footer">
-  <p>© 2025 Catálogos home</p>
+  <p>© 2025 Catálogos Home</p>
 </footer>

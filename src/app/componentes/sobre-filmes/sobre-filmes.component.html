@@ -2,22 +2,22 @@
   <div class="header-filme">
     <div 
       class="backdrop" 
-      [style.background-image]="'url(https://image.tmdb.org/t/p/original' + movieData.backdrop_path + ')'"
-    >
+      [style.background-image]="'url(https://image.tmdb.org/t/p/original' + movieData.backdrop_path + ')'">
+      
       <div class="info-principal">
         <img 
           class="poster"
           [src]="'https://image.tmdb.org/t/p/w500' + movieData.poster_path" 
-          [alt]="movieData.title"
+          [alt]="movieData.title || movieData.name"
         >
         
         <div class="texto-info">
-          <h1>{{ movieData.title }}</h1>
+          <h1>{{ movieData.title || movieData.name }}</h1>
 
-          <!-- Avaliação em estrelas + classificação indicativa juntas -->
+          <!-- Avaliação em estrelas + classificação indicativa -->
           <div class="avaliacao-estrelas">
             <ng-container *ngFor="let estrela of [1,2,3,4,5]">
-              <span [class.filled]="movieData.vote_average/2 >= estrela">★</span>
+              <span [class.filled]="(movieData.vote_average/2) >= estrela">★</span>
             </ng-container>
 
             <!-- Classificação Indicativa -->
@@ -29,18 +29,19 @@
                     'quatorze': movieData.classificacao === '14',
                     'dezesseis': movieData.classificacao === '16',
                     'dezoito': movieData.classificacao === '18',
-                    'sem-classificacao': movieData.classificacao === 'Sem'
+                    'sem-classificacao': movieData.classificacao === 'Sem' || movieData.classificacao === 'N/A'
                   }">
               {{ movieData.classificacao }}
             </span>
           </div>
 
-          <p class="tagline">{{ movieData.tagline }}</p>
-          <p class="lancamento">Data de Lançamento: {{ movieData.release_date | date: 'dd/MM/yyyy' }}</p>
-          <p class="nota">Nota: {{ movieData.vote_average | number: '1.1-1' }} / 10</p>
+          <p class="tagline" *ngIf="movieData.tagline">{{ movieData.tagline }}</p>
+          <p class="lancamento" *ngIf="movieData.release_date || movieData.first_air_date">
+            Data de Lançamento: {{ movieData.release_date || movieData.first_air_date | date:'dd/MM/yyyy' }}
+          </p>
+          <p class="nota">Nota: {{ movieData.vote_average | number:'1.1-1' }} / 10</p>
 
-          <!-- 🔥 Badge Populares -->
-          <div class="badge-popular">
+          <div class="badge-popular" *ngIf="movieData.popular">
             🔥 Populares
           </div>
         </div>
@@ -52,20 +53,23 @@
     <h2>Sinopse</h2>
     <p class="sinopse">{{ movieData.overview }}</p>
 
-    <div class="generos">
+    <div class="generos" *ngIf="movieData.genres?.length">
       <h3>Gêneros</h3>
       <ul>
         <li *ngFor="let genero of movieData.genres">{{ genero.name }}</li>
       </ul>
     </div>
-    
+
     <a routerLink="/dashboard" class="botao-voltar">
       &larr; Voltar para o Dashboard
+    </a>
+
+    <a routerLink="/home" class="botao-voltar2">
+      &larr; Voltar para a Home
     </a>
   </div>
 </div>
 
 <div *ngIf="!movieData" class="carregando">
-  Carregando detalhes do filme...
+  Carregando detalhes...
 </div>
-

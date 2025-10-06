@@ -5,14 +5,13 @@ import { SobreFilmesComponent } from './componentes/sobre-filmes/sobre-filmes.co
 import { HomeComponent } from './componentes/home/home.component';
 
 export const routes: Routes = [
-  // Rota padrão para o login
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   
-  // Rota para o dashboard
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'filme/:id', component: SobreFilmesComponent },
-
-  //Rota para a home
+  
+  // Rota unificada para filmes, séries e animes
+  { path: 'sobre-filmes/:type/:id', component: SobreFilmesComponent },
+  
   { path: 'home', component: HomeComponent }
 ];
