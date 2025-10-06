@@ -1,9 +1,11 @@
+/* Geral */
 .detalhes-filme {
   font-family: Arial, Helvetica, sans-serif;
   color: #fff;
   line-height: 1.5;
 }
 
+/* Cabeçalho */
 .header-filme {
   position: relative;
   height: 70vh;
@@ -25,6 +27,7 @@
   background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
 }
 
+/* Informações principais */
 .info-principal {
   position: absolute;
   bottom: 40px;
@@ -36,7 +39,9 @@
 }
 
 .poster {
-  width: 250px;
+  width: 100%; 
+  max-width: 250px; 
+  height: auto;
   border-radius: 10px;
   box-shadow: 0px 8px 25px rgba(0,0,0,0.7);
 }
@@ -57,12 +62,12 @@
   color: #fff;
 }
 
-.lancamento, 
-.nota {
+.lancamento, .nota {
   margin: 5px 0;
   font-weight: bold;
 }
 
+/* Corpo do Filme */
 .corpo-filme {
   background: #111;
   padding: 40px 60px;
@@ -98,7 +103,7 @@
   font-size: 0.9rem;
 }
 
-.botao-voltar {
+.botao-voltar, .botao-voltar2 {
   display: inline-block;
   margin-top: 30px;
   padding: 15px 20px;
@@ -108,19 +113,10 @@
   text-decoration: none;
   transition: 0.3s;
 }
-.botao-voltar:hover {background: #4b1362;}
 
-.botao-voltar2{
-  display: inline-block;
-  margin-top: 30px;
-  padding: 15px 36px;
-  background: #6c1d8f;
-  color: white;
-  border-radius: 20px;
-  text-decoration: none;
-  transition: 0.3s;
+.botao-voltar:hover, .botao-voltar2:hover {
+  background: #4b1362;
 }
-.botao-voltar2:hover {background: #4b1362;}
 
 .carregando {
   text-align: center;
@@ -141,7 +137,7 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
-/* Avaliação em estrelas */
+/* Avaliação em Estrelas */
 .avaliacao-estrelas {
   display: flex;
   align-items: center;
@@ -158,7 +154,7 @@
   color: #FFD700;
 }
 
-/* Classificação indicativa inline com estrelas */
+/* Classificação Indicativa */
 .classificacao {
   display: inline-block;
   padding: 2px 8px;
@@ -168,15 +164,155 @@
   text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
   box-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
+
 .detalhes-filme .header-filme .info-principal .texto-info .classificacao {
   color: #fff;
 }
 
-/* Cores da classificação */
+/* Cores da Classificação */
 .classificacao.livre { background-color: #28a745; }  
 .classificacao.dez { background-color: #007bff; }       
 .classificacao.doze { background-color: #ffc107; }      
 .classificacao.quatorze { background-color: #ff7f50; }   
 .classificacao.dezesseis { background-color: #dc3545; } 
 .classificacao.dezoito { background-color: #000000; }   
-.classificacao.sem-classificacao { background-color: #6c757d; } 
+.classificacao.sem-classificacao { background-color: #6c757d; }
+
+/* Media Queries para Responsividade */
+
+/* Para telas pequenas (até 767px) */
+@media (max-width: 767px) {
+  .header-filme {
+    height: 45vh;  /* Menor altura para o cabeçalho */
+  }
+
+  .info-principal {
+    bottom: 20px;
+    left: 20px;
+    gap: 15px;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .poster {
+    width: 80%; /* Ajuste na largura do poster */
+    max-width: 180px; /* Limite de largura */
+    max-height: 250px; /* Limite de altura */
+    margin-top: 20px;
+    height: auto;
+    object-fit: contain; /* Imagem ajustada proporcionalmente */
+  }
+
+  .texto-info h1 {
+    font-size: 1.8rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+
+  .sinopse {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+
+  .generos li {
+    font-size: 0.8rem;
+  }
+
+  .corpo-filme {
+    padding: 20px;
+  }
+
+  .botao-voltar, .botao-voltar2 {
+    padding: 12px 18px;
+    font-size: 0.9rem;
+  }
+
+  .carregando {
+    font-size: 1rem;
+  }
+
+  .avaliacao-estrelas {
+    font-size: 1rem;
+  }
+}
+
+/* Para telas médias (até 1024px) */
+@media (max-width: 1024px) {
+  .header-filme {
+    height: 60vh;
+  }
+
+  .info-principal {
+    bottom: 30px;
+    left: 30px;
+    gap: 20px;
+  }
+
+  .poster {
+    width: 70%;
+    max-width: 220px;
+    max-height: 320px; /* Ajuste de altura */
+  }
+
+  .texto-info h1 {
+    font-size: 2rem;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+  }
+
+  .sinopse {
+    font-size: 1.1rem;
+  }
+
+  .generos li {
+    font-size: 0.9rem;
+  }
+
+  .botao-voltar, .botao-voltar2 {
+    padding: 14px 25px;
+    font-size: 1rem;
+  }
+}
+
+/* Para telas grandes */
+@media (min-width: 1025px) {
+  .header-filme {
+    height: 70vh; /* Cabeçalho grande para telas grandes */
+  }
+
+  .info-principal {
+    bottom: 40px;
+    left: 50px;
+    gap: 30px;
+  }
+
+  .poster {
+    max-width: 250px;
+    max-height: 350px;
+  }
+
+  .texto-info h1 {
+    font-size: 2.5rem;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+  }
+
+  .sinopse {
+    font-size: 1.2rem;
+  }
+
+  .generos li {
+    font-size: 1rem;
+  }
+
+  .botao-voltar, .botao-voltar2 {
+    padding: 15px 25px;
+    font-size: 1.1rem;
+  }
+}
