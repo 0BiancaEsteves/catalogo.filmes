@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   buscaAtiva = false;
   sidebarAtiva = false;
 
-  private apiKey: string = 'COLOQUE A CHAVE AQUI!';
+  private apiKey: string = '';
   private apiUrl = `https://api.themoviedb.org/3/trending/all/week?api_key=${this.apiKey}&language=pt-BR&page=1`;
   private carrosselUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=pt-BR&page=1`;
 

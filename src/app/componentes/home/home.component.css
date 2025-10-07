@@ -19,12 +19,12 @@ main {
   justify-content: space-between;
   padding: 0 0px;
   z-index: 1000;
-  flex-wrap: wrap; /* permite quebrar linhas em telas menores */
+  flex-wrap: wrap; 
 }
 
 .header div div h1 {
   margin: 0;
-  padding-left: 40px; /* igual ao Dashboard */
+  padding-left: 40px;
   font-size: 1.8rem;
   font-weight: bold;
   color: #fff;
@@ -479,6 +479,7 @@ main.transparent {
 @media (max-width: 900px) {
   .header {
     flex-direction: column;
+    position: relative;
     height: auto;
     padding: 10px 15px;
     gap: 12px;
@@ -487,7 +488,26 @@ main.transparent {
   .header-left {
     justify-content: center;
     padding-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 40px;
   }
+
+   .header-left h1 {
+        position: absolute;
+        left: 50%; 
+        transform: translateX(-50%); 
+        top: 10px; 
+        width: calc(100% - 80px); 
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; 
+        white-space: nowrap; 
+        text-overflow: ellipsis;
+    }
 
   .header-right {
     justify-content: center;
@@ -553,6 +573,6 @@ main.transparent {
   }
 
   .catalogo-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 2fr;
   }
 }
