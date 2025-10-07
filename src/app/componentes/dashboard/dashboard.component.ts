@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   filmesPopulares: any[] = [];
   termoBusca: string = '';
 
-  private apiKey: string = ''; // COLOQUE SUA CHAVE AQUI
+  private apiKey: string = 'CHAVE!'; // COLOQUE SUA CHAVE AQUI
   private apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=pt-BR&page=1`;
 
   currentIndex: number = 0;
