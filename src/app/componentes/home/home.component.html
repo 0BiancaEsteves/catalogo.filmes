@@ -1,9 +1,12 @@
 <!-- Header -->
 <header class="header">
   <div class="header-left">
+    <!-- Ícone do menu (hamburger) -->
     <div class="menu-icon" (click)="toggleSidebar()">☰</div>
+
+    <!-- Nome responsivo -->
     <div class="logo">
-      <h1>Cátalogos</h1>
+      <h1>Home</h1>
     </div>
   </div>
 
@@ -15,6 +18,7 @@
              (blur)="buscaAtiva = termoBusca.length > 0"
              (ngModelChange)="buscar()">
     </div>
+
     <button class="logout-btn" (click)="logout()">Sair</button>
   </div>
 </header>

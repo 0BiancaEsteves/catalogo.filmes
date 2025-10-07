@@ -19,13 +19,14 @@ main {
   justify-content: space-between;
   padding: 0 30px;
   z-index: 1000;
-  flex-wrap: auto; /* permite quebrar linhas em telas pequenas */
+  flex-wrap: nowrap; /* Não permitir quebrar linha no desktop para evitar layout indesejado */
 }
 
+/* REMOVIDO: A declaração de font-size fixa de 1.8rem foi removida daqui
+   para que a regra clamp() mais abaixo possa funcionar corretamente. */
 .header div div h1 {
   margin: 0;
-  padding-left: 40px; /* igual ao Dashboard */
-  font-size: 1.8rem;
+  padding-left: 40px;
   font-weight: bold;
   color: #fff;
   flex: 1 1 auto;
@@ -40,8 +41,24 @@ main {
 
 .header-left {
   display: flex;
-  align-items: flex-end; /* mantém ícone na mesma linha, título descendo */
+  align-items: center; /* Alinha o ícone e o título */
   gap: 10px;
+  /* Garante que o item esquerdo não vai ocupar mais espaço do que o necessário */
+  flex-shrink: 0;
+}
+
+/* ESTE É O H1 FLUIDO QUE ESTAVA SENDO IGNORADO, AGORA FUNCIONA! */
+.header-left h1 {
+  margin: 0;
+  /* CLAMP ajustado para maior variação em telas grandes/médias */
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: bold;
+  color: #fff;
+  flex-shrink: 1; /* Permite que o título se adapte ao espaço */
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .header-right {
@@ -49,16 +66,8 @@ main {
   align-items: center;
   gap: 20px;
   justify-content: flex-end;
-  padding-right: 30px; /* move todo o grupo (input + botão) um pouco para direita */
-}
-
-
-.header-left h1 {
-  margin: 0;
-  padding-bottom: 10px 15px; /* desce o texto um pouco */
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: #fff;
+  padding-right: 30px;
+  flex-shrink: 0;
 }
 
 
@@ -77,11 +86,11 @@ main {
 }
 
 .search-box input {
-  display: block;             /* Necessário para que o margin auto funcione */
-  margin: 0 auto;             /* Centraliza horizontalmente */
-  width: 300px;               /* Define uma largura fixa */
-  max-width: 100%;            /* Ajusta o tamanho máximo, se necessário */
-  padding: 10px 100px 10px 10px;
+  display: block; 
+  /* Ajustado o width base para ser mais fluido */
+  width: 250px; 
+  max-width: 100%; 
+  padding: 10px 100px 10px 10px; /* Padding grande para o ícone de busca interno */
   border-radius: 25px;
   border: 2px solid #6c1d8f;
   outline: none;
@@ -378,72 +387,81 @@ main.transparent {
 /* ------ Responsividade ---- */
 @media (max-width: 1200px) { .catalogo-grid { grid-template-columns: repeat(4,1fr); gap: 25px; } }
 @media (max-width: 1024px) { .catalogo-grid { grid-template-columns: repeat(3,1fr); gap: 20px; } }
+
+/* Ajustes para Telas médias e pequenas (768px para baixo) */
 @media (max-width: 768px) {
   .catalogo-grid { grid-template-columns: repeat(2,1fr); gap: 15px; padding: 0 20px 50px; }
-  .header { height: auto; padding: 10px 15px; }
-  .header-right { width: 100%; margin-top: 8px; }
-  .menu-icon { display: block; }
-  .header-right .logout-btn { display: none; }
-  .search-box { flex: 1 1 auto; max-width: 220px; min-width: 150px; }
-  .search-box input { width: 140px; padding: 6px 25px 6px 8px; font-size: 0.85rem; }
-  .logo h1 { font-size: 1.1rem; white-space: nowrap; }
+  
+  .header { 
+    height: auto; 
+    padding: 10px 15px; 
+    flex-wrap: wrap; /* Permitir quebra de linha em telas menores */
+    justify-content: space-around;
+  }
+  
+  .header-left { 
+    flex-grow: 1; /* Permite ocupar o espaço necessário */
+    min-width: 0;
+  }
+  
+  .header-right { 
+    /* Faz a caixa de busca/logout ocupar 100% da largura em uma nova linha */
+    width: 100%; 
+    margin-top: 8px; 
+    padding-right: 0;
+    justify-content: center;
+    order: 3; /* Move para a parte inferior do header para a nova linha */
+    gap: 15px;
+  }
+  
+  .menu-icon { margin-right: 0; }
+  
+  /* Faz o input ocupar o máximo possível do espaço reservado para ele */
+  .search-box { 
+    flex: 1 1 60%; /* Tenta ocupar 60% do espaço, mas flexível */
+    max-width: 300px; 
+    min-width: 180px;
+  }
+  
+  .search-box input { 
+    width: 100%; /* Agora ele ocupa 100% do seu contêiner (.search-box) */
+    padding: 8px 30px 8px 10px; /* Reduzindo padding para telas pequenas */
+    font-size: 0.9rem; 
+  }
+  
+  .header-left h1 { 
+    font-size: clamp(1rem, 4vw, 1.5rem); /* Título ainda mais fluido */
+    padding-left: 0;
+  }
 }
+
+/* Telas muito pequenas (480px para baixo) */
 @media (max-width: 480px) {
   .catalogo-grid { grid-template-columns: repeat(2,1fr); gap: 10px; padding: 0 10px 50px; }
-  .logo h1 { font-size: 1rem; }
-  .search-box input { width: 120px; padding: 5px 30px 5px 8px; font-size: 0.8rem; }
-  .logout-btn { padding: 6px 9px; font-size: 0.8rem; flex-shrink: 0; display: inline-block; }
-}
-@media (max-width: 400px) {
-  .header { height: 60px; padding: 0 6px; gap: 4px; }
-  .logo h1 { font-size: 0.9rem; }
-  .search-box { min-width: 110px; max-width: 140px; }
-  .search-box input { font-size: 0.75rem; padding: 5px 20px 5px 6px; }
-  .logout-btn { padding: 5px 8px; font-size: 0.75rem; display: inline-block !important; background: #8925b4; }
-}
-/* --- HEADER RESPONSIVO FINAL AJUSTADO --- */
-
-/* Telas médias */
-@media (max-width: 768px) {
-  .header {
-    height: 70px;
-    padding: 0 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
+  
+  .header { height: auto; padding: 8px; }
+  
+  .header-left h1 { 
+    font-size: clamp(0.9rem, 4vw, 1.2rem); 
+    /* white-space: normal; Opcional: para quebrar o texto se for muito longo */
   }
-
-  .logo {
-    flex: 0 1 auto;
+  
+  .search-box { 
+    flex-basis: 100%; /* Ocupa a linha toda, empurrando o botão para a próxima */
+    max-width: 100%;
+    min-width: 100%;
+    order: 4;
   }
-
-  .logo h1 {
-    font-size: 1.1rem;
-    white-space: nowrap;
+  
+  .search-box input { 
+    width: 100%; 
+    padding: 7px 25px 7px 8px; 
+    font-size: 0.85rem; 
   }
-
-  .search-box {
-    flex: 1 1 auto;
-    max-width: 220px;
-    min-width: 150px;
-  }
-
-  .search-box input {
-    font-size: 0.85rem;
-    padding: 6px 25px 6px 8px;
-  }
-
-  .logout-btn {
-    padding: 10px 12px;
-    border-radius: 50%;
-    border: none;
-    background: #8925b4;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    flex-shrink: 0; /* impede de desaparecer */
-    white-space: nowrap;
+  
+  .logout-btn { 
+    padding: 8px 14px; 
+    font-size: 0.85rem; 
+    flex-shrink: 0; 
   }
 }
