@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 export class SobreFilmesComponent implements OnInit {
   movieData: any;
   tipo: string = 'filme'; // filme, serie ou anime
-  private apiKey: string = 'CHAVE!';
+  private apiKey: string = 'COLOQUE A CHAVE AQUI!';
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
